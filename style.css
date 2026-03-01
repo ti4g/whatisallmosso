@@ -93,17 +93,14 @@ header p {
 
 /* ── FRASE DO DIA ── */
 .frase-do-dia {
-  margin: 16px 20px 0;
-  background: linear-gradient(135deg, #f0faf4, #e8f5ee);
-  border-left: 4px solid var(--green);
-  border-radius: 14px;
-  padding: 14px 18px;
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: var(--green-dark);
+  color: #888;
   font-style: italic;
   line-height: 1.5;
-  animation: fadeUp 0.5s ease;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1.5px dashed #d8eed8;
 }
 
 /* ── TABS ── */
@@ -155,6 +152,12 @@ header p {
   padding: 20px 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+.day-card-header-left {
+  display: flex;
+  align-items: center;
   gap: 14px;
 }
 .day-card-header .day-emoji { font-size: 2.2rem; }
@@ -172,6 +175,17 @@ header p {
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 2px;
+}
+.card-date-badge {
+  background: var(--yellow);
+  color: var(--text);
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  flex-shrink: 0;
 }
 
 .menu-items { padding: 8px 16px 16px; }
@@ -314,7 +328,49 @@ header p {
 }
 .info-note .note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
 
-/* ── CRÉDITOS ── */
+/* ── PIX CARD ── */
+.pix-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+  background: linear-gradient(135deg, #fff8e7, #fff3d4);
+  border: 2px solid #ffe082;
+  border-radius: 18px;
+  padding: 14px 16px;
+  text-align: left;
+}
+.pix-emoji { font-size: 1.8rem; flex-shrink: 0; }
+.pix-text  { flex: 1; }
+.pix-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.2;
+}
+.pix-sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #888;
+  margin-top: 2px;
+}
+.pix-btn {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.82rem;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(45,158,95,0.3);
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.pix-btn:active { transform: scale(0.95); }
+
+/* ── CREDITOS ── */
 .credits {
   margin: 20px 20px 0;
   text-align: center;

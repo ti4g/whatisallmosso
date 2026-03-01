@@ -11,6 +11,7 @@
 const CARDAPIO = {
   0: null, // Domingo  — sem almoço
   1: {     // Segunda
+    data: '23/02',
     emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Strogonoff de frango' },
@@ -21,6 +22,7 @@ const CARDAPIO = {
     ]
   },
   2: {     // Terça
+    data: '24/02',
     emoji: '🥩',
     items: [
       { label: 'Prato Proteico', icon: '🥩', name: 'Tirinhas de carne' },
@@ -31,6 +33,7 @@ const CARDAPIO = {
     ]
   },
   3: {     // Quarta
+    data: '25/02',
     emoji: '🍝',
     items: [
       { label: 'Prato Proteico', icon: '🍝', name: 'Lasanha de frango' },
@@ -41,6 +44,7 @@ const CARDAPIO = {
     ]
   },
   4: {     // Quinta
+    data: '26/02',
     emoji: '🍖',
     items: [
       { label: 'Prato Proteico', icon: '🍖', name: 'Almôndegas ao molho' },
@@ -51,6 +55,7 @@ const CARDAPIO = {
     ]
   },
   5: {     // Sexta
+    data: '27/02',
     emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa assada' },
@@ -116,7 +121,17 @@ const FERIADOS = {
 };
 
 // ─────────────────────────────────────────
-// FRASE DO DIA
+// PIX
+// ─────────────────────────────────────────
+const PIX_KEY = 'tiagokxb@gmail.com';
+
+function copyPix() {
+  navigator.clipboard.writeText(PIX_KEY).then(() => {
+    const btn = document.getElementById('pix-btn-text');
+    btn.textContent = '✅ Copiado!';
+    setTimeout(() => { btn.textContent = '💸 Copiar PIX'; }, 2500);
+  });
+}
 // ✏️  Uma por dia da semana (1=Seg ... 5=Sex)
 // ─────────────────────────────────────────
 const FRASES = {
@@ -195,11 +210,14 @@ function renderCard(dayIndex, checkFeriado = false) {
   return `
     <div class="day-card">
       <div class="day-card-header">
-        <div class="day-emoji">${d.emoji}</div>
-        <div>
-          <span>Cardápio de hoje</span>
-          <h2>${DIAS[dayIndex]}-feira</h2>
+        <div class="day-card-header-left">
+          <div class="day-emoji">${d.emoji}</div>
+          <div>
+            <span>Cardápio de hoje</span>
+            <h2>${DIAS[dayIndex]}-feira</h2>
+          </div>
         </div>
+        <div class="card-date-badge">📅 ${d.data}</div>
       </div>
       <div class="menu-items">${items}</div>
     </div>`;
