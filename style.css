@@ -1,0 +1,350 @@
+/* ═══════════════════════════════════════
+   ALLMOSSO — RU IFTO Palmas
+   style.css
+   ═══════════════════════════════════════ */
+
+:root {
+  --green: #2d9e5f;
+  --green-light: #3dba72;
+  --green-dark: #1e7a47;
+  --yellow: #ffd347;
+  --orange: #ff7043;
+  --cream: #fffdf5;
+  --text: #1a2e1a;
+  --card-bg: #ffffff;
+  --shadow: 0 8px 32px rgba(45,158,95,0.13);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--cream);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── BLOBS DECORATIVOS ── */
+.blob-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.18;
+}
+.blob-1 { width: 320px; height: 320px; background: var(--green); top: -80px; left: -80px; }
+.blob-2 { width: 260px; height: 260px; background: var(--yellow); top: 40%; right: -60px; }
+.blob-3 { width: 200px; height: 200px; background: var(--orange); bottom: 60px; left: 10%; }
+
+/* ── LAYOUT ── */
+.app { position: relative; z-index: 1; max-width: 430px; margin: 0 auto; padding: 0 0 120px; }
+
+/* ── HEADER ── */
+header {
+  background: var(--green);
+  padding: 52px 24px 28px;
+  text-align: center;
+  border-radius: 0 0 32px 32px;
+  box-shadow: 0 6px 24px rgba(45,158,95,0.25);
+  position: relative;
+  overflow: hidden;
+}
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 12px);
+}
+.header-emoji { font-size: 2.8rem; display: block; margin-bottom: 4px; animation: bounce 2.5s ease-in-out infinite; }
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+header h1 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 2.2rem;
+  color: white;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+header p {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+.date-badge {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--text);
+  font-family: 'Fredoka One', cursive;
+  font-size: 1rem;
+  padding: 5px 18px;
+  border-radius: 30px;
+  margin-top: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+}
+
+/* ── FRASE DO DIA ── */
+.frase-do-dia {
+  margin: 16px 20px 0;
+  background: linear-gradient(135deg, #f0faf4, #e8f5ee);
+  border-left: 4px solid var(--green);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  font-style: italic;
+  line-height: 1.5;
+  animation: fadeUp 0.5s ease;
+}
+
+/* ── TABS ── */
+.tabs {
+  display: flex;
+  gap: 10px;
+  padding: 20px 20px 0;
+}
+.tab-btn {
+  flex: 1;
+  background: white;
+  border: 2.5px solid #e8f5ee;
+  border-radius: 16px;
+  padding: 12px 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-align: center;
+}
+.tab-btn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+  box-shadow: 0 4px 16px rgba(45,158,95,0.3);
+  transform: translateY(-2px);
+}
+.tab-btn .tab-icon { font-size: 1.2rem; display: block; margin-bottom: 2px; }
+
+/* ── SECTIONS ── */
+.section { padding: 20px 20px 0; animation: fadeUp 0.4s ease; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── CARD DO DIA ── */
+.day-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.day-card-header {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.day-card-header .day-emoji { font-size: 2.2rem; }
+.day-card-header h2 {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.5rem;
+  color: white;
+  line-height: 1.1;
+}
+.day-card-header span {
+  display: block;
+  color: rgba(255,255,255,0.8);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.menu-items { padding: 8px 16px 16px; }
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 10px;
+  border-radius: 14px;
+  transition: background 0.2s;
+  border-bottom: 1.5px dashed #f0f0f0;
+}
+.menu-item:last-child { border-bottom: none; }
+.menu-item:active     { background: #f8fdf9; }
+
+.item-icon {
+  width: 44px; height: 44px;
+  background: #f0faf4;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.item-info { flex: 1; }
+.item-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--green);
+  margin-bottom: 1px;
+}
+.item-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+/* ── WEEKEND MESSAGE ── */
+.weekend-msg {
+  background: white;
+  border-radius: 24px;
+  padding: 40px 24px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.weekend-msg .emoji { font-size: 3.5rem; display: block; margin-bottom: 12px; }
+.weekend-msg h2 { font-family: 'Fredoka One', cursive; font-size: 1.7rem; color: var(--green); margin-bottom: 8px; }
+.weekend-msg p  { color: #888; font-weight: 600; font-size: 0.9rem; }
+
+/* ── SEMANA ── */
+.week-nav {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px 12px;
+  scrollbar-width: none;
+}
+.week-nav::-webkit-scrollbar { display: none; }
+
+.day-pill {
+  flex-shrink: 0;
+  background: white;
+  border: 2.5px solid #e8f5ee;
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #888;
+  cursor: pointer;
+  transition: all 0.22s;
+  text-align: center;
+  min-width: 70px;
+}
+.day-pill small { display: block; font-size: 0.68rem; font-weight: 600; opacity: 0.7; }
+.day-pill.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+  box-shadow: 0 4px 14px rgba(45,158,95,0.28);
+  transform: translateY(-2px);
+}
+.day-pill.today-pill        { border-color: var(--yellow); }
+.day-pill.today-pill.active { background: var(--green-dark); }
+
+.week-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+/* ── TICKET BUTTON ── */
+.ticket-section {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 20px 28px;
+  background: linear-gradient(to top, var(--cream) 60%, transparent);
+}
+.ticket-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--orange), #ff5722);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 18px 24px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(255,112,67,0.4);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.ticket-btn:active { transform: scale(0.97); box-shadow: 0 3px 12px rgba(255,112,67,0.3); }
+.ticket-btn .ticket-icon { font-size: 1.4rem; }
+
+/* ── INFO NOTE ── */
+.info-note {
+  margin: 20px 20px 0;
+  background: #fff8e7;
+  border: 2px solid #ffe082;
+  border-radius: 16px;
+  padding: 12px 16px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.8rem;
+  color: #7a6000;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.info-note .note-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+
+/* ── CRÉDITOS ── */
+.credits {
+  margin: 20px 20px 0;
+  text-align: center;
+  padding: 20px 16px;
+  border-top: 1.5px dashed #d8eed8;
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.credits strong { color: var(--green); }
+.heart { display: inline-block; animation: heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.25); }
+}
+.credits-links {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.credits-links a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+.credits-links a:hover { color: var(--green); }
+
+/* ── UTILITÁRIOS ── */
+.hidden { display: none !important; }
