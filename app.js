@@ -123,7 +123,13 @@ const FERIADOS = {
 // ─────────────────────────────────────────
 // PIX
 // ─────────────────────────────────────────
-const PIX_KEY = 'tiagokxb@gmail.com';
+const PIX_KEY = 'tiagokxb' + '@' + 'gmail.com';
+
+// Injeta email no rodapé via JS (evita bloqueio de proxy)
+const emailEl   = document.getElementById('email-text');
+const emailLink = document.getElementById('email-link');
+if (emailEl)   emailEl.textContent   = PIX_KEY;
+if (emailLink) emailLink.href        = 'mailto:' + PIX_KEY;
 
 function copyPix() {
   navigator.clipboard.writeText(PIX_KEY).then(() => {

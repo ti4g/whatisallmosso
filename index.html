@@ -1,84 +1,82 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <title>Allmosso RU IFTO</title>
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Allmosso RU IFTO</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <div class="blob-bg">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-  </div>
-
-  <div class="app">
-
-    <!-- HEADER -->
-    <header>
-      <span class="header-emoji">&#127869;&#65039;</span>
-      <h1>Allmosso</h1>
-      <p>Restaurante Universitário · IFTO Palmas</p>
-      <div class="date-badge" id="header-date"></div>
-    </header>
-
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab-btn active" onclick="showTab('hoje')" id="tab-hoje">
-        <span class="tab-icon">&#9728;&#65039;</span>Hoje
-      </button>
-      <button class="tab-btn" onclick="showTab('semana')" id="tab-semana">
-        <span class="tab-icon">&#128197;</span>Semana
-      </button>
+    <div class="blob-bg">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
     </div>
 
-    <!-- SECAO HOJE -->
-    <div class="section" id="sec-hoje"></div>
+    <div class="app">
 
-    <!-- SECAO SEMANA -->
-    <div class="section hidden" id="sec-semana">
-      <div class="week-nav" id="week-nav"></div>
-      <div class="week-card" id="week-card-content"></div>
-    </div>
+        <header>
+            <span class="header-emoji">🍽️</span>
+            <h1>Allmosso</h1>
+            <p>Restaurante Universitário · IFTO Palmas</p>
+            <div class="date-badge" id="header-date"></div>
+        </header>
 
-    <!-- NOTA INFO -->
-    <div class="info-note">
-      <span class="note-icon">&#128204;</span>
-      <span>Cardápio sujeito a alterações. Em caso de dúvidas, consulte o RU diretamente.</span>
-    </div>
-
-    <!-- RODAPE -->
-    <footer class="credits">
-      <div class="frase-do-dia hidden" id="frase-do-dia"></div>
-      <p>Feito por <strong>tiagokk</strong></p>
-      <div class="credits-links">
-        <a href="mailto:tiagokxb@gmail.com">&#9993;&#65039; tiagokxb@gmail.com</a>
-        <a href="https://instagram.com/xktiago" target="_blank">&#128247; @xktiago</a>
-      </div>
-      <div class="pix-card">
-        <span class="pix-emoji">&#129368;</span>
-        <div class="pix-text">
-          <p class="pix-title">Gostou do Allmosso?</p>
-          <p class="pix-sub">Ele aceita elogios… e PIX também &#128516;</p>
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('hoje')" id="tab-hoje">
+                <span class="tab-icon">☀️</span>Hoje
+            </button>
+            <button class="tab-btn" onclick="showTab('semana')" id="tab-semana">
+                <span class="tab-icon">📅</span>Semana
+            </button>
         </div>
-        <button class="pix-btn" onclick="copyPix()">
-          <span id="pix-btn-text">&#128184; Copiar PIX</span>
-        </button>
-      </div>
-    </footer>
 
-  </div>
+        <div class="section" id="sec-hoje"></div>
 
-  <!-- BOTAO TICKET FIXO -->
-  <div class="ticket-section">
-    <a href="https://sig.ifto.edu.br" target="_blank" class="ticket-btn">
-      <span class="ticket-icon">&#127903;&#65039;</span> Gerar meu Ticket
-    </a>
-  </div>
+        <div class="section hidden" id="sec-semana">
+            <div class="week-nav" id="week-nav"></div>
+            <div class="week-card" id="week-card-content"></div>
+        </div>
 
-  <script src="app.js"></script>
+        <div class="info-note">
+            <span class="note-icon">📌</span>
+            <span>Cardápio sujeito a alterações. Em caso de dúvidas, consulte o RU diretamente.</span>
+        </div>
+
+        <footer class="credits">
+            <div class="frase-do-dia hidden" id="frase-do-dia"></div>
+            <p>Feito por <strong>tiagokk</strong></p>
+            <div class="credits-links">
+                <a id="email-link" href="#">✉️ <span id="email-text"></span></a>
+                <a href="https://instagram.com/xktiago" target="_blank">📸 @xktiago</a>
+            </div>
+            <div class="pix-card">
+                <span class="pix-emoji">🥘</span>
+                <div class="pix-text">
+                    <p class="pix-title">Gostou do Allmosso?</p>
+                    <p class="pix-sub">Ele aceita elogios… e PIX também 😄</p>
+                </div>
+                <button class="pix-btn" onclick="copyPix()">
+                    <span id="pix-btn-text">💸 Copiar PIX</span>
+                </button>
+            </div>
+        </footer>
+
+    </div>
+
+    <div class="ticket-section">
+        <a href="https://sig.ifto.edu.br" target="_blank" class="ticket-btn">
+            <span class="ticket-icon">🎫</span> Gerar meu Ticket
+        </a>
+    </div>
+
+    <script src="app.js"></script>
 </body>
+
 </html>
