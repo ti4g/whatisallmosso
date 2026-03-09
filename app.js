@@ -11,58 +11,58 @@
 const CARDAPIO = {
   0: null, // Domingo  — sem almoço
   1: {     // Segunda
-    data: '02/03',
-    emoji: '🍗',
+    data: '09/03',
+    emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
-      { label: 'Guarnição',      icon: '🥗', name: 'Maionese de legumes' },
-      { label: 'Salada',         icon: '🥬', name: 'Acelga e tomate' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata palha' },
+      { label: 'Salada',         icon: '🥗', name: 'Cenoura e alface' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete' },
+      { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
     ]
   },
   2: {     // Terça
-    data: '03/03',
-    emoji: '🥩',
+    data: '10/03',
+    emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Ensopadinho de carne com legumes' },
-      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
+      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
       { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Ensopadinho de PTS' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
     ]
   },
   3: {     // Quarta
-    data: '04/03',
+    data: '11/03',
     emoji: '🫘',
     items: [
       { label: 'Prato Proteico', icon: '🫘', name: 'Feijoada' },
       { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
       { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz' },
-      { label: 'Vegetariano',    icon: '🫘', name: 'Feijoada vegetariana' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
     ]
   },
   4: {     // Quinta
-    data: '05/03',
-    emoji: '🥩',
+    data: '12/03',
+    emoji: '🍝',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Lagarto ao molho' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
-      { label: 'Salada',         icon: '🥗', name: 'Couve e repolho' },
+      { label: 'Prato Proteico', icon: '🍝', name: 'Lasanha de carne' },
+      { label: 'Guarnição',      icon: '🥦', name: 'Mix de legumes' },
+      { label: 'Salada',         icon: '🥗', name: 'Acelga e tomate' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Disco de PTS' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
     ]
   },
   5: {     // Sexta
-    data: '06/03',
+    data: '13/03',
     emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa ao molho com batata' },
-      { label: 'Guarnição',      icon: '🌽', name: 'Polenta' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango recheado' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
+      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
     ]
   },
   6: null, // Sábado  — sem almoço
