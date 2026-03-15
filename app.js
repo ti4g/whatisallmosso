@@ -11,60 +11,40 @@
 const CARDAPIO = {
   0: null, // Domingo  — sem almoço
   1: {     // Segunda
-    data: '09/03',
-    emoji: '🥩',
+    data: '16/03',
+    emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Batata palha' },
-      { label: 'Salada',         icon: '🥗', name: 'Cenoura e alface' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
     ]
   },
   2: {     // Terça
-    data: '10/03',
+    data: '17/03',
+    emoji: '🥩',
+    items: [
+      { label: 'Prato Proteico', icon: '🥩', name: 'Tiras de carne ao molho barbecue' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
+      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+      { label: 'Vegetariano',    icon: '🥒', name: 'Abobrinha recheada' },
+    ]
+  },
+  3: {     // Quarta
+    data: '18/03',
     emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
-      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
     ]
   },
-  3: {     // Quarta
-    data: '11/03',
-    emoji: '🫘',
-    items: [
-      { label: 'Prato Proteico', icon: '🫘', name: 'Feijoada' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
-    ]
-  },
-  4: {     // Quinta
-    data: '12/03',
-    emoji: '🍝',
-    items: [
-      { label: 'Prato Proteico', icon: '🍝', name: 'Lasanha de carne' },
-      { label: 'Guarnição',      icon: '🥦', name: 'Mix de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Acelga e tomate' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
-    ]
-  },
-  5: {     // Sexta
-    data: '13/03',
-    emoji: '🍗',
-    items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Frango recheado' },
-      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
-    ]
-  },
+  4: null, // Quinta — Feriado (Dia da Autonomia do Tocantins)
+  5: null, // Sexta  — Feriado (Dia de São José, Padroeiro de Palmas)
   6: null, // Sábado  — sem almoço
 };
 
@@ -196,12 +176,24 @@ function renderCard(dayIndex, checkFeriado = false) {
   const d = CARDAPIO[dayIndex];
 
   if (!d) {
-    return `
-      <div class="weekend-msg">
-        <span class="emoji">😴</span>
-        <h2>Sem almoço hoje!</h2>
-        <p>O RU não funciona aos finais de semana.<br>Aproveite o descanso! 🌴</p>
-      </div>`;
+    const isWeekend = dayIndex === 0 || dayIndex === 6;
+    if (isWeekend) {
+      return `
+        <div class="weekend-msg">
+          <span class="emoji">😴</span>
+          <h2>Sem almoço hoje!</h2>
+          <p>O RU não funciona aos finais de semana.<br>Aproveite o descanso! 🌴</p>
+        </div>`;
+    } else {
+      // Feriado no meio da semana marcado no cardápio
+      const nomeF = FERIADOS[toKey(now)] || 'Feriado';
+      return `
+        <div class="weekend-msg">
+          <span class="emoji">🎉</span>
+          <h2>Feriado!</h2>
+          <p><strong>${nomeF}</strong><br>O RU não funciona hoje.<br>Bom feriado! 🥳</p>
+        </div>`;
+    }
   }
 
   const items = d.items.map(i => `
