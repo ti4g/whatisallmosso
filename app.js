@@ -14,7 +14,7 @@ const CARDAPIO = {
     data: '16/03',
     emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango ao Molho' },
       { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
       { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
