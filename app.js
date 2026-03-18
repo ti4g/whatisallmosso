@@ -286,15 +286,29 @@ function initFirebase() {
 }
 
 function castVote(dayKey) {
-  if (userVote) return;
-  userVote = String(dayKey);
+  const prevVote = userVote;
+  const newVote  = String(dayKey);
+
+  // Clicou no mesmo dia — ignora
+  if (prevVote === newVote) return;
+
+  userVote = newVote;
   localStorage.setItem(VOTED_KEY, userVote);
 
   if (db) {
-    const ref = db.ref(`votos/${WEEK_KEY}/${dayKey}`);
-    ref.transaction(cur => (cur || 0) + 1);
+    const updates = {};
+    // Decrementa voto anterior
+    if (prevVote) {
+      updates[`votos/${WEEK_KEY}/${prevVote}`] =
+        firebase.database.ServerValue.increment(-1);
+    }
+    // Incrementa novo voto
+    updates[`votos/${WEEK_KEY}/${newVote}`] =
+      firebase.database.ServerValue.increment(1);
+    db.ref().update(updates);
   } else {
-    votesData[dayKey] = (votesData[dayKey] || 0) + 1;
+    if (prevVote) votesData[prevVote] = Math.max(0, (votesData[prevVote] || 0) - 1);
+    votesData[newVote] = (votesData[newVote] || 0) + 1;
     renderVotacao(false);
   }
 }
@@ -303,7 +317,7 @@ function renderVotacao(firebaseAtivo) {
   const container = document.getElementById('votacao-container');
   if (!container) return;
 
-  const total = Object.values(votesData).reduce((a,b) => a+b, 0);
+  const total    = Object.values(votesData).reduce((a,b) => a+b, 0);
   const hasVoted = !!userVote;
 
   const dias = VOTE_DIAS.map(v => {
@@ -311,11 +325,11 @@ function renderVotacao(firebaseAtivo) {
     const pct     = total > 0 ? Math.round((votos / total) * 100) : 0;
     const isVoted = String(v.key) === String(userVote);
     const isFer   = !v.data;
+    const clickable = !isFer && !isVoted;
 
     return `
-      <div class="vote-item ${isVoted ? 'voted' : ''} ${isFer ? 'feriado' : ''}"
-           onclick="${isFer || hasVoted ? '' : `castVote(${v.key})`}"
-           style="cursor:${isFer || hasVoted ? 'default' : 'pointer'}">
+      <div class="vote-item ${isVoted ? 'voted' : ''} ${isFer ? 'feriado' : ''} ${clickable ? 'clickable' : ''}"
+           onclick="${isFer ? '' : `castVote(${v.key})`}">
         <div class="vote-item-left">
           <span class="vote-emoji">${v.emoji}</span>
           <div class="vote-info">
@@ -344,7 +358,7 @@ function renderVotacao(firebaseAtivo) {
         <div>
           <p class="votacao-title">Qual foi o melhor almoço?</p>
           <p class="votacao-sub">${hasVoted
-            ? `${total} voto${total !== 1 ? 's' : ''} essa semana`
+            ? `${total} voto${total !== 1 ? 's' : ''} essa semana · toque em outro para trocar`
             : 'Vote no seu favorito da semana!'}</p>
         </div>
       </div>
