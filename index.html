@@ -1,82 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Allmosso RU IFTO</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Allmosso RU IFTO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-    <div class="blob-bg">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
+  <div class="blob-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div class="app">
+
+    <header>
+      <span class="header-emoji">🍽️</span>
+      <h1>Allmosso</h1>
+      <p>Restaurante Universitário · IFTO Palmas</p>
+      <div class="date-badge" id="header-date"></div>
+    </header>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('hoje')" id="tab-hoje">
+        <span class="tab-icon">☀️</span>Hoje
+      </button>
+      <button class="tab-btn" onclick="showTab('semana')" id="tab-semana">
+        <span class="tab-icon">📅</span>Semana
+      </button>
     </div>
 
-    <div class="app">
+    <div class="frase-do-dia hidden" id="frase-do-dia"></div>
 
-        <header>
-            <span class="header-emoji">🍽️</span>
-            <h1>Allmosso</h1>
-            <p>Restaurante Universitário · IFTO Palmas</p>
-            <div class="date-badge" id="header-date"></div>
-        </header>
+    <div class="section" id="sec-hoje"></div>
 
-        <div class="tabs">
-            <button class="tab-btn active" onclick="showTab('hoje')" id="tab-hoje">
-                <span class="tab-icon">☀️</span>Hoje
-            </button>
-            <button class="tab-btn" onclick="showTab('semana')" id="tab-semana">
-                <span class="tab-icon">📅</span>Semana
-            </button>
-        </div>
-
-        <div class="section" id="sec-hoje"></div>
-
-        <div class="section hidden" id="sec-semana">
-            <div class="week-nav" id="week-nav"></div>
-            <div class="week-card" id="week-card-content"></div>
-        </div>
-
-        <div class="info-note">
-            <span class="note-icon">📌</span>
-            <span>Cardápio sujeito a alterações. Em caso de dúvidas, consulte o RU diretamente.</span>
-        </div>
-
-        <footer class="credits">
-            <div class="frase-do-dia hidden" id="frase-do-dia"></div>
-            <p>Feito por <strong>tiagokk</strong></p>
-            <div class="credits-links">
-                <a id="email-link" href="#">✉️ <span id="email-text"></span></a>
-                <a href="https://instagram.com/xktiago" target="_blank">📸 @xktiago</a>
-            </div>
-            <div class="pix-card">
-                <span class="pix-emoji">🥘</span>
-                <div class="pix-text">
-                    <p class="pix-title">Gostou do Allmosso?</p>
-                    <p class="pix-sub">Ele aceita elogios… e PIX também 😄</p>
-                </div>
-                <button class="pix-btn" onclick="copyPix()">
-                    <span id="pix-btn-text">💸 Copiar PIX</span>
-                </button>
-            </div>
-        </footer>
-
+    <div class="section hidden" id="sec-semana">
+      <div class="week-nav" id="week-nav"></div>
+      <div class="week-card" id="week-card-content"></div>
     </div>
 
-    <div class="ticket-section">
-        <a href="https://si.ifto.edu.br/restaurante/gerar_ticket/" target="_blank" class="ticket-btn">
-            <span class="ticket-icon">🎫</span> Gerar meu Ticket
-        </a>
+    <!-- VOTAÇÃO -->
+    <div class="section" id="votacao-container"></div>
+
+    <!-- NOTA INFO -->
+    <div class="info-note">
+      <span class="note-icon">📌</span>
+      <span>Cardápio sujeito a alterações. Em caso de dúvidas, consulte o RU diretamente.</span>
     </div>
 
-    <script src="app.js"></script>
+    <!-- RODAPE -->
+    <footer class="credits">
+      <div class="frase-do-dia hidden" id="frase-do-dia-rodape"></div>
+      <p>Feito por <strong>Tiago</strong> · <a href="https://instagram.com/xktiago" target="_blank">@xktiago</a></p>
+      <a id="wa-link" href="#" target="_blank" class="wa-btn">
+        <span>💬</span> Encontrou algum erro? Fala comigo
+      </a>
+    </footer>
+
+  </div>
+
+  <!-- BOTÃO TICKET FIXO -->
+  <div class="ticket-section">
+    <a href="https://sig.ifto.edu.br" target="_blank" class="ticket-btn">
+      <span class="ticket-icon">🎫</span> Gerar meu Ticket
+    </a>
+  </div>
+
+  <!-- FIREBASE -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="app.js"></script>
 </body>
-
 </html>

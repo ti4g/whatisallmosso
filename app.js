@@ -4,15 +4,29 @@
    ═══════════════════════════════════════ */
 
 // ─────────────────────────────────────────
+// FIREBASE CONFIG
+// ✏️  Cole aqui suas credenciais do Firebase
+// console.firebase.google.com → Seu projeto → Config
+// ─────────────────────────────────────────
+const FIREBASE_CONFIG = {
+  apiKey:            "AIzaSyBkqNcDzUWoJ_DvVnprecKs8fb7p7Nlv7w",
+  authDomain:        "allmosso.firebaseapp.com",
+  databaseURL:       "https://allmosso-default-rtdb.firebaseio.com",
+  projectId:         "allmosso",
+  storageBucket:     "allmosso.firebasestorage.app",
+  messagingSenderId: "220562668021",
+  appId:             "1:220562668021:web:e3fb9dbabd3b15091948bc",
+};
+
+// ─────────────────────────────────────────
 // DADOS DO CARDÁPIO
 // ✏️  Atualize aqui toda semana!
 // 1 = Segunda | 2 = Terça | 3 = Quarta | 4 = Quinta | 5 = Sexta
 // ─────────────────────────────────────────
 const CARDAPIO = {
-  0: null, // Domingo  — sem almoço
-  1: {     // Segunda
-    data: '16/03',
-    emoji: '🍗',
+  0: null,
+  1: {
+    data: '16/03', emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Frango ao molho' },
       { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
@@ -21,9 +35,8 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
     ]
   },
-  2: {     // Terça
-    data: '17/03',
-    emoji: '🥩',
+  2: {
+    data: '17/03', emoji: '🥩',
     items: [
       { label: 'Prato Proteico', icon: '🥩', name: 'Tiras de carne ao molho barbecue' },
       { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
@@ -32,9 +45,8 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🥒', name: 'Abobrinha recheada' },
     ]
   },
-  3: {     // Quarta
-    data: '18/03',
-    emoji: '🍗',
+  3: {
+    data: '18/03', emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
       { label: 'Guarnição',      icon: '🟣', name: 'Beterraba' },
@@ -43,10 +55,9 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
     ]
   },
-  4: null, // Quinta — Feriado (Dia da Autonomia do Tocantins)
-  5: {     // Sexta
-    data: '20/03',
-    emoji: '🥩',
+  4: null, // Quinta — Feriado
+  5: {
+    data: '20/03', emoji: '🥩',
     items: [
       { label: 'Prato Proteico', icon: '🥩', name: 'Lagarto ao molho' },
       { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
@@ -55,88 +66,46 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
     ]
   },
-  6: null, // Sábado  — sem almoço
+  6: null,
 };
 
 // ─────────────────────────────────────────
 // FERIADOS
-// ✏️  Adicione aqui os feriados no formato 'DD/MM': 'Nome do feriado'
-// O RU não funcionará nesses dias e exibirá mensagem automática.
+// ✏️  Formato 'DD/MM': 'Nome do feriado'
 // ─────────────────────────────────────────
 const FERIADOS = {
-  // ── JANEIRO
   '01/01': 'Confraternização Universal 🎆',
-
-  // ── FEVEREIRO
   '16/02': 'Carnaval (ponto facultativo) 🎭',
   '17/02': 'Carnaval (ponto facultativo) 🎭',
   '18/02': 'Quarta-feira de Cinzas (ponto facultativo até 14h) 🎭',
-
-  // ── MARÇO
   '19/03': 'Dia de São José — Padroeiro de Palmas 🙏',
-
-  // ── ABRIL
   '03/04': 'Paixão de Cristo 🕊️',
   '21/04': 'Tiradentes 🇧🇷',
-
-  // ── MAIO
   '01/05': 'Dia Mundial do Trabalho 👷',
   '20/05': 'Aniversário de Palmas 🎂',
-
-  // ── JUNHO
   '04/06': 'Corpus Christi (ponto facultativo) ✝️',
-
-  // ── AGOSTO
   '15/08': 'Senhor do Bonfim (feriado estadual) 🙏',
-
-  // ── SETEMBRO
   '07/09': 'Independência do Brasil 🇧🇷',
   '08/09': 'Nossa Sra. da Natividade — Padroeira do Tocantins 🙏',
-
-  // ── OUTUBRO
   '05/10': 'Criação do Estado do Tocantins (feriado estadual) 🏛️',
   '12/10': 'Nossa Sra. Aparecida — Padroeira do Brasil 🇧🇷',
   '15/10': 'Dia do Professor (feriado escolar) 👩‍🏫',
   '28/10': 'Dia do Servidor Público (ponto facultativo) 📋',
-
-  // ── NOVEMBRO
   '02/11': 'Finados 🕯️',
   '15/11': 'Proclamação da República 🇧🇷',
   '20/11': 'Dia da Consciência Negra ✊',
-
-  // ── DEZEMBRO
   '24/12': 'Véspera do Natal (ponto facultativo após 14h) 🎄',
   '25/12': 'Natal 🎄',
   '31/12': 'Véspera do Ano Novo (ponto facultativo após 14h) 🎆',
 };
 
 // ─────────────────────────────────────────
-// PIX
+// WHATSAPP SAC
 // ─────────────────────────────────────────
-const PIX_KEY = 'tiagokxb' + '@' + 'gmail.com';
+const WA_LINK = 'https://wa.me/5563999614831';
 
-// Injeta email no rodapé via JS (evita bloqueio de proxy)
-const emailEl   = document.getElementById('email-text');
-const emailLink = document.getElementById('email-link');
-if (emailEl)   emailEl.textContent   = PIX_KEY;
-if (emailLink) emailLink.href        = 'mailto:' + PIX_KEY;
-
-function copyPix() {
-  navigator.clipboard.writeText(PIX_KEY).then(() => {
-    const btn = document.getElementById('pix-btn-text');
-    btn.textContent = '✅ Copiado!';
-    setTimeout(() => { btn.textContent = '💸 Copiar PIX'; }, 2500);
-  });
-}
-// ✏️  Uma por dia da semana (1=Seg ... 5=Sex)
 // ─────────────────────────────────────────
-const FRASES = {
-  1: 'Restaurante que tem ventilador de teto não serve farofa. 🍃',
-  2: 'Tempestade revela telhado falso. ⛈️',
-  3: 'O sabor do depois depende da paciência do agora. ⏳',
-  4: 'Difícil não é matar o leão, é cuidar das antas. 🦁',
-  5: 'Ando rápido mas nunca tenho pressa. 🏃',
-};
+// CONSTANTES
 // ─────────────────────────────────────────
 const DIAS       = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
 const DIAS_SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
@@ -145,42 +114,47 @@ const MESES      = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out',
 const now   = new Date();
 const today = now.getDay();
 
-// Chave no formato DD/MM para checar feriados
 function toKey(date) {
   const d = String(date.getDate()).padStart(2, '0');
   const m = String(date.getMonth() + 1).padStart(2, '0');
   return `${d}/${m}`;
 }
+
+// Chave única da semana (ex: "2026-W12") para isolar votos por semana
+function getWeekKey() {
+  const d = new Date(now);
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+  const week1 = new Date(d.getFullYear(), 0, 4);
+  const wn = 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+  return `${d.getFullYear()}-W${wn}`;
+}
+
 const todayKey    = toKey(now);
 const isFeriado   = todayKey in FERIADOS;
 const feriadoNome = FERIADOS[todayKey] || '';
+const WEEK_KEY    = getWeekKey();
 
 // ─────────────────────────────────────────
-// HEADER — data de hoje
+// HEADER
 // ─────────────────────────────────────────
 document.getElementById('header-date').textContent =
   `${DIAS[today]}, ${now.getDate()} de ${MESES[now.getMonth()]}`;
 
-// ── Frase do dia
-const frase = FRASES[today];
-if (frase) {
-  const el = document.getElementById('frase-do-dia');
-  el.textContent = `"${frase}"`;
-  el.classList.remove('hidden');
-}
+// Injeta link do WhatsApp
+const waLink = document.getElementById('wa-link');
+if (waLink) waLink.href = WA_LINK;
 
 // ─────────────────────────────────────────
 // RENDERIZA CARD DE UM DIA
 // ─────────────────────────────────────────
 function renderCard(dayIndex, checkFeriado = false) {
-  // Feriado de hoje (só aplica na aba "Hoje")
   if (checkFeriado && isFeriado) {
-    return `
-      <div class="weekend-msg">
-        <span class="emoji">🎉</span>
-        <h2>Feriado!</h2>
-        <p><strong>${feriadoNome}</strong><br>O RU não funciona hoje.<br>Bom feriado! 🥳</p>
-      </div>`;
+    return `<div class="weekend-msg">
+      <span class="emoji">🎉</span>
+      <h2>Feriado!</h2>
+      <p><strong>${feriadoNome}</strong><br>O RU não funciona hoje.<br>Bom feriado! 🥳</p>
+    </div>`;
   }
 
   const d = CARDAPIO[dayIndex];
@@ -188,21 +162,18 @@ function renderCard(dayIndex, checkFeriado = false) {
   if (!d) {
     const isWeekend = dayIndex === 0 || dayIndex === 6;
     if (isWeekend) {
-      return `
-        <div class="weekend-msg">
-          <span class="emoji">😴</span>
-          <h2>Sem almoço hoje!</h2>
-          <p>O RU não funciona aos finais de semana.<br>Aproveite o descanso! 🌴</p>
-        </div>`;
+      return `<div class="weekend-msg">
+        <span class="emoji">😴</span>
+        <h2>Sem almoço hoje!</h2>
+        <p>O RU não funciona aos finais de semana.<br>Aproveite o descanso! 🌴</p>
+      </div>`;
     } else {
-      // Feriado no meio da semana marcado no cardápio
       const nomeF = FERIADOS[toKey(now)] || 'Feriado';
-      return `
-        <div class="weekend-msg">
-          <span class="emoji">🎉</span>
-          <h2>Feriado!</h2>
-          <p><strong>${nomeF}</strong><br>O RU não funciona hoje.<br>Bom feriado! 🥳</p>
-        </div>`;
+      return `<div class="weekend-msg">
+        <span class="emoji">🎉</span>
+        <h2>Feriado!</h2>
+        <p><strong>${nomeF}</strong><br>O RU não funciona hoje.<br>Bom feriado! 🥳</p>
+      </div>`;
     }
   }
 
@@ -231,9 +202,6 @@ function renderCard(dayIndex, checkFeriado = false) {
     </div>`;
 }
 
-// ─────────────────────────────────────────
-// ABA HOJE
-// ─────────────────────────────────────────
 document.getElementById('sec-hoje').innerHTML = renderCard(today, true);
 
 // ─────────────────────────────────────────
@@ -244,15 +212,13 @@ let selectedDay = (today === 0 || today === 6) ? 1 : today;
 function buildWeekNav() {
   const nav = document.getElementById('week-nav');
   nav.innerHTML = '';
-
-  [1, 2, 3, 4, 5].forEach(d => {
+  [1,2,3,4,5].forEach(d => {
     const pill = document.createElement('button');
     pill.className = 'day-pill'
-      + (d === today      ? ' today-pill' : '')
-      + (d === selectedDay ? ' active'    : '');
-
+      + (d === today       ? ' today-pill' : '')
+      + (d === selectedDay ? ' active'     : '');
     pill.innerHTML = `${DIAS_SHORT[d]}<small>${d === today ? 'hoje' : ''}</small>`;
-    pill.onclick   = () => { selectedDay = d; buildWeekNav(); buildWeekCard(); };
+    pill.onclick = () => { selectedDay = d; buildWeekNav(); buildWeekCard(); };
     nav.appendChild(pill);
   });
 }
@@ -269,8 +235,124 @@ buildWeekCard();
 // ─────────────────────────────────────────
 function showTab(tab) {
   const isHoje = tab === 'hoje';
-  document.getElementById('sec-hoje').classList.toggle('hidden', !isHoje);
+  document.getElementById('sec-hoje').classList.toggle('hidden',   !isHoje);
   document.getElementById('sec-semana').classList.toggle('hidden',  isHoje);
   document.getElementById('tab-hoje').classList.toggle('active',    isHoje);
   document.getElementById('tab-semana').classList.toggle('active', !isHoje);
 }
+
+// ─────────────────────────────────────────
+// VOTAÇÃO — FIREBASE REALTIME DATABASE
+// ─────────────────────────────────────────
+const VOTE_DIAS = [
+  { key: 1, label: 'Segunda', data: '' },
+  { key: 2, label: 'Terça',   data: '' },
+  { key: 3, label: 'Quarta',  data: '' },
+  { key: 4, label: 'Quinta',  data: '' },
+  { key: 5, label: 'Sexta',   data: '' },
+];
+
+// Preenche datas dos dias
+VOTE_DIAS.forEach(v => {
+  const d = CARDAPIO[v.key];
+  v.data = d ? d.data : null;
+  v.emoji = d ? d.emoji : '🎉';
+  v.prato = d ? d.items.find(i => i.label === 'Prato Proteico')?.name : 'Feriado';
+});
+
+const VOTED_KEY = `allmosso_voted_${WEEK_KEY}`;
+let userVote    = localStorage.getItem(VOTED_KEY);
+let db          = null;
+let votesData   = { 1:0, 2:0, 3:0, 4:0, 5:0 };
+
+// Inicializa Firebase
+function initFirebase() {
+  try {
+    if (FIREBASE_CONFIG.apiKey === 'COLE_AQUI') {
+      renderVotacao(false); // mostra sem Firebase (modo demo)
+      return;
+    }
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.database();
+    const ref = db.ref(`votos/${WEEK_KEY}`);
+    ref.on('value', snap => {
+      const data = snap.val() || {};
+      [1,2,3,4,5].forEach(k => { votesData[k] = data[k] || 0; });
+      renderVotacao(true);
+    });
+  } catch(e) {
+    renderVotacao(false);
+  }
+}
+
+function castVote(dayKey) {
+  if (userVote) return;
+  userVote = String(dayKey);
+  localStorage.setItem(VOTED_KEY, userVote);
+
+  if (db) {
+    const ref = db.ref(`votos/${WEEK_KEY}/${dayKey}`);
+    ref.transaction(cur => (cur || 0) + 1);
+  } else {
+    votesData[dayKey] = (votesData[dayKey] || 0) + 1;
+    renderVotacao(false);
+  }
+}
+
+function renderVotacao(firebaseAtivo) {
+  const container = document.getElementById('votacao-container');
+  if (!container) return;
+
+  const total = Object.values(votesData).reduce((a,b) => a+b, 0);
+  const hasVoted = !!userVote;
+
+  const dias = VOTE_DIAS.map(v => {
+    const votos   = votesData[v.key] || 0;
+    const pct     = total > 0 ? Math.round((votos / total) * 100) : 0;
+    const isVoted = String(v.key) === String(userVote);
+    const isFer   = !v.data;
+
+    return `
+      <div class="vote-item ${isVoted ? 'voted' : ''} ${isFer ? 'feriado' : ''}"
+           onclick="${isFer || hasVoted ? '' : `castVote(${v.key})`}"
+           style="cursor:${isFer || hasVoted ? 'default' : 'pointer'}">
+        <div class="vote-item-left">
+          <span class="vote-emoji">${v.emoji}</span>
+          <div class="vote-info">
+            <span class="vote-dia">${v.label} ${v.data ? `<small>📅 ${v.data}</small>` : ''}</span>
+            <span class="vote-prato">${v.prato || 'Feriado 🎉'}</span>
+          </div>
+        </div>
+        <div class="vote-right">
+          ${hasVoted ? `
+            <div class="vote-bar-wrap">
+              <div class="vote-bar" style="width:${pct}%"></div>
+            </div>
+            <span class="vote-pct">${pct}%</span>
+          ` : `
+            <span class="vote-btn-hint">${isFer ? '🎉' : '👆 votar'}</span>
+          `}
+          ${isVoted ? '<span class="vote-check">✅</span>' : ''}
+        </div>
+      </div>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="votacao-card">
+      <div class="votacao-header">
+        <span class="votacao-icon">🏆</span>
+        <div>
+          <p class="votacao-title">Qual foi o melhor almoço?</p>
+          <p class="votacao-sub">${hasVoted
+            ? `${total} voto${total !== 1 ? 's' : ''} essa semana`
+            : 'Vote no seu favorito da semana!'}</p>
+        </div>
+      </div>
+      <div class="vote-list">${dias}</div>
+      ${!firebaseAtivo && FIREBASE_CONFIG.apiKey === 'COLE_AQUI'
+        ? '<p class="vote-demo-msg">⚙️ Configure o Firebase para votos em tempo real</p>'
+        : ''}
+    </div>`;
+}
+
+initFirebase();

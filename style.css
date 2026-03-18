@@ -307,6 +307,7 @@ header p {
   box-shadow: 0 6px 24px rgba(255,112,67,0.4);
   text-decoration: none;
   transition: all 0.2s;
+  -webkit-appearance: none;
 }
 .ticket-btn:active { transform: scale(0.97); box-shadow: 0 3px 12px rgba(255,112,67,0.3); }
 .ticket-btn .ticket-icon { font-size: 1.4rem; }
@@ -404,3 +405,134 @@ header p {
 
 /* ── UTILITÁRIOS ── */
 .hidden { display: none !important; }
+
+/* ── VOTAÇÃO ── */
+.votacao-card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-top: 20px;
+}
+.votacao-header {
+  background: linear-gradient(135deg, var(--green), var(--green-light));
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.votacao-icon { font-size: 1.8rem; }
+.votacao-title {
+  font-family: 'Fredoka One', cursive;
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.1;
+}
+.votacao-sub {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.8);
+  margin-top: 2px;
+}
+.vote-list { padding: 8px 12px 12px; }
+.vote-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 8px;
+  border-radius: 14px;
+  border-bottom: 1.5px dashed #f0f0f0;
+  transition: background 0.18s;
+}
+.vote-item:last-child { border-bottom: none; }
+.vote-item:not(.feriado):not(.voted):hover { background: #f5fdf8; }
+.vote-item.voted { background: #f0faf4; }
+.vote-item.feriado { opacity: 0.45; }
+.vote-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+.vote-emoji { font-size: 1.4rem; flex-shrink: 0; }
+.vote-info { display: flex; flex-direction: column; min-width: 0; }
+.vote-dia {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vote-dia small { font-weight: 700; color: #aaa; font-size: 0.68rem; }
+.vote-prato {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.vote-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  min-width: 80px;
+  justify-content: flex-end;
+}
+.vote-bar-wrap {
+  width: 60px;
+  height: 6px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.vote-bar {
+  height: 100%;
+  background: var(--green);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+.vote-pct {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--green);
+  min-width: 28px;
+  text-align: right;
+}
+.vote-btn-hint {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #bbb;
+}
+.vote-check { font-size: 0.9rem; }
+.vote-demo-msg {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #bbb;
+  text-align: center;
+  padding: 8px;
+}
+
+/* ── WHATSAPP RODAPE ── */
+.credits a { color: var(--green); text-decoration: none; font-weight: 800; }
+.wa-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  background: #25d366;
+  color: white !important;
+  border-radius: 14px;
+  padding: 12px 20px;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(37,211,102,0.3);
+  transition: all 0.2s;
+}
+.wa-btn:active { transform: scale(0.97); }
