@@ -14,9 +14,13 @@ const CARDAPIO = {
     data: '16/03',
     emoji: '🍗',
     items: [
+<<<<<<< HEAD
       { label: 'Prato Proteico', icon: '🍗', name: 'Frango ao Molho' },
+=======
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango ao molho' },
+>>>>>>> 56616f0 (sexta adc)
       { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface, beterraba e repolho' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
     ]
@@ -38,13 +42,23 @@ const CARDAPIO = {
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
       { label: 'Guarnição',      icon: '🟣', name: 'Beterraba' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
+      { label: 'Salada',         icon: '🥗', name: 'Acelga e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
     ]
   },
   4: null, // Quinta — Feriado (Dia da Autonomia do Tocantins)
-  5: null, // Sexta  — Feriado (Dia de São José, Padroeiro de Palmas)
+  5: {     // Sexta
+    data: '20/03',
+    emoji: '🥩',
+    items: [
+      { label: 'Prato Proteico', icon: '🥩', name: 'Lagarto ao molho' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
+      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
+    ]
+  },
   6: null, // Sábado  — sem almoço
 };
 
