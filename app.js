@@ -242,8 +242,8 @@ const CARDAPIO_VOTACAO = {
   1: { data: '30/03', emoji: '🥩', prato: 'Tiras de carne acebolada' },
   2: { data: '31/03', emoji: '🍗', prato: 'Lasanha de frango' },
   3: { data: '01/04', emoji: '🍗', prato: 'Frango xadrez' },
-  4: { data: '02/04', emoji: '📚', prato: 'Dia não letivo' },
-  5: { data: '03/04', emoji: '🕊️', prato: 'Feriado' },
+  4: { data: null, emoji: '📚', prato: 'Dia não letivo' },
+  5: { data: null, emoji: '🕊️', prato: 'Feriado' },
 };
 
 const VOTE_WEEK_KEY = '2026-W14';
