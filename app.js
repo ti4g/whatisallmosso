@@ -56,15 +56,15 @@ const CARDAPIO = {
     ]
   },
   4: {
-    data: '09/04', emoji: '🍗',
-    items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Lasanha de frango' },
-      { label: 'Guarnição',      icon: '🥦', name: 'Mix de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
-    ]
-  },
+      data: '09/04', emoji: '🍗',
+      items: [
+        { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
+        { label: 'Guarnição',      icon: '🥗', name: 'Maionese de legumes' },
+        { label: 'Salada',         icon: '🥗', name: 'Beterraba e alface' },
+        { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+        { label: 'Vegetariano',    icon: '🌱', name: 'PTS a jardineira' },
+      ]
+    },
   5: {
     data: '10/04', emoji: '🍖',
     items: [
