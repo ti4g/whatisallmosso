@@ -378,7 +378,7 @@ function renderVotacao(firebaseAtivo) {
           <p class="votacao-title">Qual foi o melhor almoço?</p>
           <p class="votacao-sub">${hasVoted
             ? `${total} voto${total !== 1 ? 's' : ''} essa semana · toque em outro para trocar`
-            : 'Vote no seu favorito da semana!'}</p>
+            : 'Vote no melhor da semana passada!'}</p>
         </div>
       </div>
       <div class="vote-list">${dias}</div>
@@ -386,6 +386,16 @@ function renderVotacao(firebaseAtivo) {
         ? '<p class="vote-demo-msg">⚙️ Configure o Firebase para votos em tempo real</p>'
         : ''}
     </div>`;
+}
+
+// ─────────────────────────────────────────
+// CONTADOR DE TICKETS
+// ─────────────────────────────────────────
+const btnTicket = document.getElementById('btn-ticket');
+if (btnTicket && db) {
+  btnTicket.addEventListener('click', () => {
+    db.ref('tickets/total').transaction(v => (v || 0) + 1);
+  });
 }
 
 initFirebase();
