@@ -182,7 +182,7 @@ function renderCard(dayIndex, checkFeriado = false) {
 
   const d = CARDAPIO[dayIndex];
 
-  if (!d) {
+  if (!d || !d.items) {
     const isWeekend = dayIndex === 0 || dayIndex === 6;
     if (isWeekend) {
       return `<div class="weekend-msg">
@@ -191,7 +191,7 @@ function renderCard(dayIndex, checkFeriado = false) {
         <p>O RU não funciona aos finais de semana.<br>Aproveite o descanso! 🌴</p>
       </div>`;
     } else {
-      const nomeF = FERIADOS[toKey(now)] || "Feriado";
+      const nomeF = d?.prato || FERIADOS[toKey(now)] || "Feriado";
       return `<div class="weekend-msg">
         <span class="emoji">🎉</span>
         <h2>Feriado!</h2>
