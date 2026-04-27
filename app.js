@@ -65,8 +65,7 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
     ]
   },
-  5: null,
-  6: null,
+  5: { data: null, emoji: '🎉', prato: 'Feriado — Dia do Trabalhador' },  6: null,
 };
 
 // ─────────────────────────────────────────
