@@ -26,57 +26,57 @@ const FIREBASE_CONFIG = {
 const CARDAPIO = {
   0: null,
   1: {
-    data: '04/05', emoji: '🌭',
+    data: '11/05', emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🌭', name: 'Linguiça suína' },
-      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
+      { label: 'Salada',         icon: '🥗', name: 'Beterraba e alface' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
+      { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
     ]
   },
   2: {
-    data: '05/05', emoji: '🍗',
+    data: '12/05', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa ao molho' },
-      { label: 'Guarnição',      icon: '🟡', name: 'Polenta' },
-      { label: 'Salada',         icon: '🥗', name: 'Acelga e tomate' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango xadrez' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
+      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Disco de PTS' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'PTS a xadrez' },
     ]
   },
   3: {
-    data: '06/05', emoji: '🥩',
+    data: '13/05', emoji: '🫘',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Panqueca de carne' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba' },
-      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Prato Proteico', icon: '🫘', name: 'Feijoada' },
+      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
+      { label: 'Salada',         icon: '🥗', name: 'Couve e vinagrete' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Panqueca de PTS' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
     ]
   },
   4: {
-    data: '07/05', emoji: '🍗',
+    data: '14/05', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
-      { label: 'Guarnição',      icon: '🥦', name: 'Mix de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Galinhada' },
+      { label: 'Guarnição',      icon: '🍠', name: 'Batata doce' },
+      { label: 'Salada',         icon: '🥗', name: 'Acelga e tomate' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🥚', name: 'Moqueca de ovo' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Galinhada vegetariana' },
     ]
   },
   5: {
-    data: '08/05', emoji: '🥩',
+    data: '15/05', emoji: '🍖',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Tiras de carnes' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
-      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
+      { label: 'Prato Proteico', icon: '🍖', name: 'Almôndegas ao molho' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'PTS à cebolada' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
     ]
   },
   6: null,
-};
+};  
 
 // ─────────────────────────────────────────
 // FERIADOS
@@ -290,14 +290,14 @@ function showTab(tab) {
 // ✏️  Cardápio da semana anterior — usado na votação
 // Atualize aqui toda semana com os dados da semana que passou
 const CARDAPIO_VOTACAO = {
-  1: { data: '27/04', emoji: '🍗', prato: 'Strogonoff de frango' },
-  2: { data: '28/04', emoji: '🥩', prato: 'Lasanha de carne' },
-  3: { data: '29/04', emoji: '🫘', prato: 'Feijoada' },
-  4: { data: '30/04', emoji: '🍗', prato: 'Coxa e sobrecoxa assada' },
-  5: { data: null,    emoji: '🎉', prato: 'Feriado — Dia do Trabalhador' },
+  1: { data: '04/05', emoji: '🌭', prato: 'Linguiça suína' },
+  2: { data: '05/05', emoji: '🍗', prato: 'Coxa e sobrecoxa ao molho' },
+  3: { data: '06/05', emoji: '🥩', prato: 'Panqueca de carne' },
+  4: { data: '07/05', emoji: '🍗', prato: 'Bife de frango' },
+  5: { data: '08/05', emoji: '🥩', prato: 'Tiras de carnes' },
 };
 
-const VOTE_WEEK_KEY = '2026-W18';
+const VOTE_WEEK_KEY = '2026-W19';
 
 const VOTE_DIAS = [
   { key: 1, label: "Segunda" },
