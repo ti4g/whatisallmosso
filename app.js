@@ -290,14 +290,14 @@ function showTab(tab) {
 // ✏️  Cardápio da semana anterior — usado na votação
 // Atualize aqui toda semana com os dados da semana que passou
 const CARDAPIO_VOTACAO = {
-  1: { data: '11/05', emoji: '🥩', prato: 'Strogonoff de carne' },
-  2: { data: '12/05', emoji: '🍗', prato: 'Frango xadrez' },
-  3: { data: '13/05', emoji: '🫘', prato: 'Feijoada' },
-  4: { data: '14/05', emoji: '🍗', prato: 'Galinhada' },
-  5: { data: '15/05', emoji: '🍖', prato: 'Almôndegas ao molho' },
+  1: { data: '18/05', emoji: '🍗', prato: 'Strogonoff de frango' },
+  2: { data: '19/05', emoji: '🥩', prato: 'Tiras de carne ao molho barbecue' },
+  3: { data: null,    emoji: '🎉', prato: 'Feriado — Corpus Christi' },
+  4: { data: '21/05', emoji: '🍗', prato: 'Lasanha de frango' },
+  5: { data: '22/05', emoji: '🫘', prato: 'Feijoada' },
 };
 
-const VOTE_WEEK_KEY = '2026-W20';
+const VOTE_WEEK_KEY = '2026-W21';
 
 const VOTE_DIAS = [
   { key: 1, label: "Segunda" },
