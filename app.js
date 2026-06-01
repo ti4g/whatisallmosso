@@ -26,55 +26,37 @@ const FIREBASE_CONFIG = {
 const CARDAPIO = {
   0: null,
   1: {
-    data: '25/05', emoji: '🍗',
+    data: '01/06', emoji: '🌭',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa assada' },
-      { label: 'Guarnição',      icon: '🌭', name: 'Macarrão com salsicha' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
-    ]
-  },
-  2: {
-    data: '26/05', emoji: '🥩',
-    items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Lagarto ao molho escuro' },
-      { label: 'Guarnição',      icon: '🍠', name: 'Batata doce rústica' },
-      { label: 'Salada',         icon: '🥗', name: 'Couve e repolho' },
+      { label: 'Prato Proteico', icon: '🌭', name: 'Linguiça suína' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
     ]
   },
-  3: {
-    data: '27/05', emoji: '🍗',
+  2: {
+    data: '02/06', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
-      { label: 'Guarnição',      icon: '🥗', name: 'Maionese de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Acelga com tomate' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
-    ]
-  },
-  4: {
-    data: '28/05', emoji: '🥩',
-    items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Escondidinho de carne' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
-      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa assada' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
+      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'Escondidinho de PTS' },
     ]
   },
-  5: {
-    data: '29/05', emoji: '🍖',
+  3: {
+    data: '03/06', emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🍖', name: 'Grelhado misto (frango e calabresa)' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
-      { label: 'Salada',         icon: '🥗', name: 'Cenoura e alface' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata palha' },
+      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Ensopadinho de PTS' },
+      { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
     ]
   },
+  4: null,
+  5: null,
   6: null,
 };
 
@@ -290,14 +272,14 @@ function showTab(tab) {
 // ✏️  Cardápio da semana anterior — usado na votação
 // Atualize aqui toda semana com os dados da semana que passou
 const CARDAPIO_VOTACAO = {
-  1: { data: '18/05', emoji: '🍗', prato: 'Strogonoff de frango' },
-  2: { data: '19/05', emoji: '🥩', prato: 'Tiras de carne ao molho barbecue' },
-  3: { data: null,    emoji: '🎉', prato: 'Feriado — Corpus Christi' },
-  4: { data: '21/05', emoji: '🍗', prato: 'Lasanha de frango' },
-  5: { data: '22/05', emoji: '🫘', prato: 'Feijoada' },
+  1: { data: '25/05', emoji: '🍗', prato: 'Coxa e sobrecoxa assada' },
+  2: { data: '26/05', emoji: '🥩', prato: 'Lagarto ao molho escuro' },
+  3: { data: '27/05', emoji: '🍗', prato: 'Bife de frango' },
+  4: { data: '28/05', emoji: '🥩', prato: 'Escondidinho de carne' },
+  5: { data: '29/05', emoji: '🍖', prato: 'Grelhado misto (frango e calabresa)' },
 };
 
-const VOTE_WEEK_KEY = '2026-W21';
+const VOTE_WEEK_KEY = '2026-W22';
 
 const VOTE_DIAS = [
   { key: 1, label: "Segunda" },
