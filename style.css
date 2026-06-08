@@ -13,6 +13,9 @@
   --text: #1a2e1a;
   --card-bg: #ffffff;
   --shadow: 0 8px 32px rgba(45,158,95,0.13);
+  --therm-bom:    #b8d957;
+  --therm-normal: #ffb27a;
+  --therm-ruim:   #f5c6c6;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -406,7 +409,7 @@ header p {
 /* ── UTILITÁRIOS ── */
 .hidden { display: none !important; }
 
-/* ── VOTAÇÃO ── */
+/* ── TERMÔMETRO DO DIA ── */
 .votacao-card {
   background: white;
   border-radius: 24px;
@@ -431,84 +434,96 @@ header p {
 .votacao-sub {
   font-size: 0.72rem;
   font-weight: 700;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.85);
   margin-top: 2px;
 }
-.vote-list { padding: 8px 12px 12px; }
-.vote-item {
+.votacao-sub strong { color: white; font-size: 0.78rem; }
+
+.therm-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 14px;
+}
+.therm-btn {
+  appearance: none;
+  border: 2px solid transparent;
+  background: #fafafa;
+  border-radius: 16px;
+  padding: 12px 8px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.18s, border-color 0.18s;
+  font-family: inherit;
+}
+.therm-btn:hover { transform: translateY(-2px); }
+.therm-btn:active { transform: translateY(0); }
+
+.therm-btn.therm-bom    { background: color-mix(in srgb, var(--therm-bom)    35%, white); }
+.therm-btn.therm-normal { background: color-mix(in srgb, var(--therm-normal) 35%, white); }
+.therm-btn.therm-ruim   { background: color-mix(in srgb, var(--therm-ruim)   45%, white); }
+
+.therm-btn.reacted.therm-bom    { border-color: var(--therm-bom);    background: color-mix(in srgb, var(--therm-bom)    60%, white); }
+.therm-btn.reacted.therm-normal { border-color: var(--therm-normal); background: color-mix(in srgb, var(--therm-normal) 55%, white); }
+.therm-btn.reacted.therm-ruim   { border-color: #e89a9a;             background: color-mix(in srgb, var(--therm-ruim)   70%, white); }
+
+.therm-btn-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+  width: 100%;
+}
+.therm-check {
+  position: absolute;
+  top: -10px;
+  right: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--green);
+  color: white;
+  font-size: 0.78rem;
+  font-weight: 900;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 10px 8px;
-  border-radius: 14px;
-  border-bottom: 1.5px dashed #f0f0f0;
-  transition: background 0.18s;
+  justify-content: center;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
 }
-.vote-item:last-child { border-bottom: none; }
-.vote-item:not(.feriado):not(.voted):hover { background: #f5fdf8; }
-.vote-item.voted { background: #f0faf4; }
-.vote-item.feriado { opacity: 0.45; }
-.vote-item-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
-  min-width: 0;
-}
-.vote-emoji { font-size: 1.4rem; flex-shrink: 0; }
-.vote-info { display: flex; flex-direction: column; min-width: 0; }
-.vote-dia {
+.therm-emoji { font-size: 1.6rem; line-height: 1; }
+.therm-label {
   font-size: 0.78rem;
   font-weight: 800;
-  color: var(--green);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.vote-dia small { font-weight: 700; color: #aaa; font-size: 0.68rem; }
-.vote-prato {
-  font-size: 0.82rem;
-  font-weight: 700;
   color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
-.vote-right {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-  min-width: 80px;
-  justify-content: flex-end;
-}
-.vote-bar-wrap {
-  width: 60px;
+.therm-bar-wrap {
+  width: 100%;
   height: 6px;
-  background: #eee;
+  background: rgba(0,0,0,0.08);
   border-radius: 10px;
   overflow: hidden;
+  margin-top: 4px;
 }
-.vote-bar {
+.therm-bar {
   height: 100%;
-  background: var(--green);
   border-radius: 10px;
-  transition: width 0.5s ease;
+  transition: width 0.4s ease;
 }
-.vote-pct {
-  font-size: 0.72rem;
+.therm-bar-bom    { background: var(--therm-bom); }
+.therm-bar-normal { background: var(--therm-normal); }
+.therm-bar-ruim   { background: #e89a9a; }
+
+.therm-pct {
+  font-size: 0.78rem;
   font-weight: 800;
-  color: var(--green);
-  min-width: 28px;
-  text-align: right;
+  color: var(--text);
 }
-.vote-btn-hint {
-  font-size: 0.7rem;
-  font-weight: 800;
-  color: #bbb;
-}
-.vote-check { font-size: 0.9rem; }
+
 .vote-demo-msg {
   font-size: 0.68rem;
   font-weight: 700;

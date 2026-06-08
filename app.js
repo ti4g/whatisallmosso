@@ -141,7 +141,21 @@ const MESES = [
 ];
 
 const now = new Date();
-const today = now.getDay();
+// ?dia=0..6 simula um dia específico (debug). Afeta tanto o cardápio
+// exibido quanto a chave TODAY_ISO usada no Firebase — então votar em ?dia=1
+// num domingo já popula o slot da próxima segunda.
+const _diaOverride = new URLSearchParams(location.search).get("dia");
+let today;
+let _refDate;
+if (_diaOverride !== null && /^[0-6]$/.test(_diaOverride)) {
+  today = Number(_diaOverride);
+  _refDate = new Date(now);
+  const diff = (today - now.getDay() + 7) % 7;
+  _refDate.setDate(now.getDate() + diff);
+} else {
+  today = now.getDay();
+  _refDate = now;
+}
 
 function toKey(date) {
   const d = String(date.getDate()).padStart(2, "0");
@@ -149,22 +163,13 @@ function toKey(date) {
   return `${d}/${m}`;
 }
 
-// Chave única da semana (ex: "2026-W12") para isolar votos por semana
-function getWeekKey() {
-  const d = new Date(now);
-  d.setHours(0, 0, 0, 0);
-  d.setDate(d.getDate() + 3 - ((d.getDay() + 6) % 7));
-  const week1 = new Date(d.getFullYear(), 0, 4);
-  const wn =
-    1 +
-    Math.round(((d - week1) / 86400000 - 3 + ((week1.getDay() + 6) % 7)) / 7);
-  return `${d.getFullYear()}-W${wn}`;
-}
-
 const todayKey = toKey(now);
 const isFeriado = todayKey in FERIADOS;
 const feriadoNome = FERIADOS[todayKey] || "";
-const WEEK_KEY = getWeekKey();
+
+// Chave ISO do dia em hora LOCAL (ex: "2026-06-07") — usada como path no Firebase
+// Usa _refDate (que respeita ?dia=N) e componentes locais para evitar drift de UTC.
+const TODAY_ISO = `${_refDate.getFullYear()}-${String(_refDate.getMonth() + 1).padStart(2, "0")}-${String(_refDate.getDate()).padStart(2, "0")}`;
 
 // ─────────────────────────────────────────
 // HEADER
@@ -283,44 +288,23 @@ function showTab(tab) {
 }
 
 // ─────────────────────────────────────────
-// VOTAÇÃO — FIREBASE REALTIME DATABASE
+// TERMÔMETRO DO DIA — FIREBASE REALTIME DATABASE
 // ─────────────────────────────────────────
+const REACTIONS = [
+  { key: "bom",    emoji: "🔥", label: "Tá bom"  },
+  { key: "normal", emoji: "😄", label: "Normal"  },
+  { key: "ruim",   emoji: "🥲", label: "Tá ruim" },
+];
 
-// ✏️  Cardápio da semana anterior — usado na votação
-// Atualize aqui toda semana com os dados da semana que passou
-const CARDAPIO_VOTACAO = {
-  1: { data: '01/06', emoji: '🌭', prato: 'Linguiça suína' },
-  2: { data: '02/06', emoji: '🍗', prato: 'Coxa e sobrecoxa assada' },
-  3: { data: '03/06', emoji: '🥩', prato: 'Strogonoff de carne' },
-  4: { data: null,    emoji: '📚', prato: 'Dia não letivo' },
-  5: { data: null,    emoji: '📚', prato: 'Dia não letivo' },
-};
-
-const VOTE_WEEK_KEY = '2026-W23';
-
-const VOTE_DIAS = [
-  { key: 1, label: "Segunda" },
-  { key: 2, label: "Terça" },
-  { key: 3, label: "Quarta" },
-  { key: 4, label: "Quinta" },
-  { key: 5, label: "Sexta" },
-].map((v) => ({
-  ...v,
-  data: CARDAPIO_VOTACAO[v.key]?.data || null,
-  emoji: CARDAPIO_VOTACAO[v.key]?.emoji || "🎉",
-  prato: CARDAPIO_VOTACAO[v.key]?.prato || "Feriado",
-}));
-
-const VOTED_KEY = `allmosso_voted_${VOTE_WEEK_KEY}`;
-let userVote = localStorage.getItem(VOTED_KEY);
+const REACTED_KEY = `allmosso_reacted_${TODAY_ISO}`;
+let userReaction = localStorage.getItem(REACTED_KEY); // 'bom'|'normal'|'ruim'|null
+let reactionData = { bom: 0, normal: 0, ruim: 0 };
 let db = null;
-let votesData = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
 
-// Inicializa Firebase
 function initFirebase() {
   try {
     if (FIREBASE_CONFIG.apiKey === "COLE_AQUI") {
-      renderVotacao(false); // mostra sem Firebase (modo demo)
+      renderTermometro(false);
       return;
     }
     firebase.initializeApp(FIREBASE_CONFIG);
@@ -333,107 +317,119 @@ function initFirebase() {
       });
     }
 
-    const ref = db.ref(`votos/${VOTE_WEEK_KEY}`);
-    ref.on("value", (snap) => {
-      const data = snap.val() || {};
-      [1, 2, 3, 4, 5].forEach((k) => {
-        votesData[k] = data[k] || 0;
-      });
-      renderVotacao(true);
-    });
+    // Renderiza imediatamente (estado vazio) — listener só atualiza depois
+    renderTermometro(true);
+
+    db.ref(`termometro/${TODAY_ISO}`).on(
+      "value",
+      (snap) => {
+        const data = snap.val() || {};
+        REACTIONS.forEach((r) => {
+          reactionData[r.key] = data[r.key] || 0;
+        });
+        renderTermometro(true);
+      },
+      (err) => {
+        console.warn(
+          "Termômetro: leitura negada pelo Firebase. Verifique se a regra de termometro/* foi adicionada.",
+          err
+        );
+      }
+    );
   } catch (e) {
-    renderVotacao(false);
+    console.warn("Termômetro: erro ao inicializar Firebase.", e);
+    renderTermometro(false);
   }
 }
 
-function castVote(dayKey) {
-  const prevVote = userVote;
-  const newVote = String(dayKey);
+function castReaction(tipo) {
+  const prev = userReaction;
+  if (prev === tipo) return; // clicou no mesmo — no-op
 
-  // Clicou no mesmo dia — ignora
-  if (prevVote === newVote) return;
+  // Troca exige confirmação
+  if (prev) {
+    const prevEmoji = REACTIONS.find((r) => r.key === prev).emoji;
+    const newEmoji  = REACTIONS.find((r) => r.key === tipo).emoji;
+    const ok = window.confirm(`Trocar sua reação de ${prevEmoji} pra ${newEmoji}?`);
+    if (!ok) return;
+  }
 
-  userVote = newVote;
-  localStorage.setItem(VOTED_KEY, userVote);
+  userReaction = tipo;
+  localStorage.setItem(REACTED_KEY, tipo);
+
+  // Update otimista: aplica localmente antes do servidor confirmar
+  if (prev) reactionData[prev] = Math.max(0, (reactionData[prev] || 0) - 1);
+  reactionData[tipo] = (reactionData[tipo] || 0) + 1;
+  renderTermometro(!!db);
 
   if (db) {
     const updates = {};
-    // Decrementa voto anterior
-    if (prevVote) {
-      updates[`votos/${VOTE_WEEK_KEY}/${prevVote}`] =
+    if (prev) {
+      updates[`termometro/${TODAY_ISO}/${prev}`] =
         firebase.database.ServerValue.increment(-1);
     }
-    // Incrementa novo voto
-    updates[`votos/${VOTE_WEEK_KEY}/${newVote}`] =
+    updates[`termometro/${TODAY_ISO}/${tipo}`] =
       firebase.database.ServerValue.increment(1);
     db.ref().update(updates);
-  } else {
-    if (prevVote)
-      votesData[prevVote] = Math.max(0, (votesData[prevVote] || 0) - 1);
-    votesData[newVote] = (votesData[newVote] || 0) + 1;
-    renderVotacao(false);
   }
 }
 
-function renderVotacao(firebaseAtivo) {
+function renderTermometro(firebaseAtivo) {
   const container = document.getElementById("votacao-container");
   if (!container) return;
 
-  const total = Object.values(votesData).reduce((a, b) => a + b, 0);
-  const hasVoted = !!userVote;
+  // Sem prato hoje (fim de semana ou feriado) → some
+  const semPrato = isFeriado || !CARDAPIO[today];
+  if (semPrato) {
+    container.innerHTML = "";
+    return;
+  }
 
-  const dias = VOTE_DIAS.map((v) => {
-    const votos = votesData[v.key] || 0;
-    const pct = total > 0 ? Math.round((votos / total) * 100) : 0;
-    const isVoted = String(v.key) === String(userVote);
-    const isFer = !v.data;
-    const clickable = !isFer && !isVoted;
+  const total = REACTIONS.reduce((sum, r) => sum + (reactionData[r.key] || 0), 0);
+  const hasReacted = !!userReaction;
+
+  const botoes = REACTIONS.map((r) => {
+    const count = reactionData[r.key] || 0;
+    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+    const isMine = r.key === userReaction;
 
     return `
-      <div class="vote-item ${isVoted ? "voted" : ""} ${isFer ? "feriado" : ""} ${clickable ? "clickable" : ""}"
-           onclick="${isFer ? "" : `castVote(${v.key})`}">
-        <div class="vote-item-left">
-          <span class="vote-emoji">${v.emoji}</span>
-          <div class="vote-info">
-            <span class="vote-dia">${v.label} ${v.data ? `<small>📅 ${v.data}</small>` : ""}</span>
-            <span class="vote-prato">${v.prato || "Feriado 🎉"}</span>
-          </div>
+      <button class="therm-btn therm-${r.key} ${isMine ? "reacted" : ""}"
+              onclick="castReaction('${r.key}')"
+              aria-label="${r.label}">
+        <div class="therm-btn-top">
+          <span class="therm-emoji">${r.emoji}</span>
+          <span class="therm-label">${r.label}</span>
+          ${isMine ? '<span class="therm-check">✓</span>' : ""}
         </div>
-        <div class="vote-right">
-          ${
-            hasVoted
-              ? `
-            <div class="vote-bar-wrap">
-              <div class="vote-bar" style="width:${pct}%"></div>
-            </div>
-            <span class="vote-pct">${pct}%</span>
-          `
-              : `
-            <span class="vote-btn-hint">${isFer ? "🎉" : "👆 votar"}</span>
-          `
-          }
-          ${isVoted ? '<span class="vote-check">✅</span>' : ""}
-        </div>
-      </div>`;
+        ${
+          hasReacted
+            ? `<div class="therm-bar-wrap">
+                 <div class="therm-bar therm-bar-${r.key}" style="width:${pct}%"></div>
+               </div>
+               <span class="therm-pct">${pct}%</span>`
+            : ""
+        }
+      </button>`;
   }).join("");
 
+  const subText = hasReacted
+    ? `<strong>${total}</strong> reaç${total === 1 ? "ão" : "ões"} · toque em outro pra trocar`
+    : `<strong>${total}</strong> reaç${total === 1 ? "ão até agora" : "ões até agora"} · toque pra reagir`;
+
   container.innerHTML = `
-    <div class="votacao-card">
+    <div class="votacao-card therm-card">
       <div class="votacao-header">
-        <span class="votacao-icon">🏆</span>
+        <span class="votacao-icon">🌡️</span>
         <div>
-          <p class="votacao-title">Qual foi o melhor almoço?</p>
-          <p class="votacao-sub">${
-            hasVoted
-              ? `${total} voto${total !== 1 ? "s" : ""} essa semana · toque em outro para trocar`
-              : "Vote no melhor da semana passada!"
-          }</p>
+          <p class="votacao-title">Termômetro do dia</p>
+          <p class="votacao-sub">${subText}</p>
         </div>
       </div>
-      <div class="vote-list">${dias}</div>
+      <div class="therm-list">${botoes}</div>
       ${
         !firebaseAtivo && FIREBASE_CONFIG.apiKey === "COLE_AQUI"
-          ? '<p class="vote-demo-msg">⚙️ Configure o Firebase para votos em tempo real</p>'
+          ? '<p class="vote-demo-msg">⚙️ Configure o Firebase para reações em tempo real</p>'
           : ""
       }
     </div>`;
