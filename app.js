@@ -300,6 +300,8 @@ const REACTED_KEY = `allmosso_reacted_${TODAY_ISO}`;
 let userReaction = localStorage.getItem(REACTED_KEY); // 'bom'|'normal'|'ruim'|null
 let reactionData = { bom: 0, normal: 0, ruim: 0 };
 let db = null;
+let _castCooldown = false;
+let _firebaseLoaded = false;
 
 function initFirebase() {
   try {
@@ -323,6 +325,7 @@ function initFirebase() {
     db.ref(`termometro/${TODAY_ISO}`).on(
       "value",
       (snap) => {
+        _firebaseLoaded = true;
         const data = snap.val() || {};
         REACTIONS.forEach((r) => {
           reactionData[r.key] = data[r.key] || 0;
@@ -343,16 +346,12 @@ function initFirebase() {
 }
 
 function castReaction(tipo) {
+  if (_castCooldown) return;
   const prev = userReaction;
-  if (prev === tipo) return; // clicou no mesmo — no-op
+  if (prev === tipo) return;
 
-  // Troca exige confirmação
-  if (prev) {
-    const prevEmoji = REACTIONS.find((r) => r.key === prev).emoji;
-    const newEmoji  = REACTIONS.find((r) => r.key === tipo).emoji;
-    const ok = window.confirm(`Trocar sua reação de ${prevEmoji} pra ${newEmoji}?`);
-    if (!ok) return;
-  }
+  _castCooldown = true;
+  setTimeout(() => { _castCooldown = false; }, 800);
 
   userReaction = tipo;
   localStorage.setItem(REACTED_KEY, tipo);
@@ -388,30 +387,31 @@ function renderTermometro(firebaseAtivo) {
   const total = REACTIONS.reduce((sum, r) => sum + (reactionData[r.key] || 0), 0);
   const hasReacted = !!userReaction;
 
-  const botoes = REACTIONS.map((r) => {
+  const pills = REACTIONS.map((r) => {
     const count = reactionData[r.key] || 0;
-    const pct = total > 0 ? Math.round((count / total) * 100) : 0;
     const isMine = r.key === userReaction;
-
     return `
-      <button class="therm-btn therm-${r.key} ${isMine ? "reacted" : ""}"
+      <button class="therm-pill therm-${r.key} ${isMine ? "reacted" : ""}"
               onclick="castReaction('${r.key}')"
               aria-label="${r.label}">
-        <div class="therm-btn-top">
-          <span class="therm-emoji">${r.emoji}</span>
-          <span class="therm-label">${r.label}</span>
-          ${isMine ? '<span class="therm-check">✓</span>' : ""}
-        </div>
-        ${
-          hasReacted
-            ? `<div class="therm-bar-wrap">
-                 <div class="therm-bar therm-bar-${r.key}" style="width:${pct}%"></div>
-               </div>
-               <span class="therm-pct">${pct}%</span>`
-            : ""
-        }
+        ${isMine ? '<span class="therm-check">✓</span>' : ""}
+        <span class="therm-emoji">${r.emoji}</span>
+        <span class="therm-label">${r.label}</span>
+        <span class="therm-count">${count}</span>
       </button>`;
   }).join("");
+
+  const segBar = total > 0
+    ? REACTIONS.map((r) => {
+        const count = reactionData[r.key] || 0;
+        const pct = Math.round((count / total) * 100);
+        return `<div class="therm-seg ${r.key}" style="flex-grow:${count || 0.001}">
+          ${pct >= 15 ? `<span class="therm-seg-pct">${pct}%</span>` : ""}
+        </div>`;
+      }).join("")
+    : _firebaseLoaded
+      ? `<div class="therm-seg-empty">Ninguém votou ainda hoje · seja o primeiro 👆</div>`
+      : `<div class="therm-seg-loading"></div>`;
 
   const subText = hasReacted
     ? `<strong>${total}</strong> reaç${total === 1 ? "ão" : "ões"} · toque em outro pra trocar`
@@ -426,7 +426,14 @@ function renderTermometro(firebaseAtivo) {
           <p class="votacao-sub">${subText}</p>
         </div>
       </div>
-      <div class="therm-list">${botoes}</div>
+      <div class="therm-pills">${pills}</div>
+      <div class="therm-seg-wrap">
+        <div class="therm-seg-label">Temperatura geral do dia</div>
+        <div class="therm-seg-bar ${total === 0 ? "therm-seg-bar-empty" : ""}">${segBar}</div>
+        <div class="therm-seg-legend">
+          ${REACTIONS.map((r) => `<span>${r.emoji} ${r.label}</span>`).join("")}
+        </div>
+      </div>
       ${
         !firebaseAtivo && FIREBASE_CONFIG.apiKey === "COLE_AQUI"
           ? '<p class="vote-demo-msg">⚙️ Configure o Firebase para reações em tempo real</p>'
