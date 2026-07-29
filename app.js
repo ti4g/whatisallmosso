@@ -25,54 +25,36 @@ const FIREBASE_CONFIG = {
 // ─────────────────────────────────────────
 const CARDAPIO = {
   0: null,
-  1: {
-    data: '22/06', emoji: '🍗',
+  1: { data: '27/07', naoLetivo: true },
+  2: { data: '28/07', naoLetivo: true },
+  3: {
+    data: '29/07', emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete' },
-    ]
-  },
-  2: {
-    data: '23/06', emoji: '🥩',
-    items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Tiras de carne' },
-      { label: 'Guarnição',      icon: '🍠', name: 'Batata doce' },
-      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
-    ]
-  },
-  3: {
-    data: '24/06', emoji: '🍗',
-    items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Lasanha de frango' },
-      { label: 'Guarnição',      icon: '🥦', name: 'Mix de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
-    ]
-  },
-  4: {
-    data: '25/06', emoji: '🥩',
-    items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Carne de panela' },
       { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
-      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
+      { label: 'Salada',         icon: '🥗', name: 'Couve e repolho' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS acebolada' },
     ]
   },
-  5: {
-    data: '26/06', emoji: '🍲',
+  4: {
+    data: '30/07', emoji: '🍝',
     items: [
-      { label: 'Prato Proteico', icon: '🍲', name: 'Feijoada' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Lasanha de carne' },
+      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
+    ]
+  },
+  5: {
+    data: '31/07', emoji: '🍗',
+    items: [
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
       { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
-      { label: 'Salada',         icon: '🥗', name: 'Couve e vinagrete' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
+      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
     ]
   },
   6: null,
@@ -194,6 +176,14 @@ function renderCard(dayIndex, checkFeriado = false) {
   }
 
   const d = CARDAPIO[dayIndex];
+
+  if (d && d.naoLetivo) {
+    return `<div class="weekend-msg">
+      <span class="emoji">📅</span>
+      <h2>Dia não letivo</h2>
+      <p>Não há aula nesta data${d.data ? ` (${d.data})` : ""}.<br>Sem cardápio no RU hoje.</p>
+    </div>`;
+  }
 
   if (!d || !d.items) {
     const isWeekend = dayIndex === 0 || dayIndex === 6;
@@ -378,7 +368,7 @@ function renderTermometro(firebaseAtivo) {
   if (!container) return;
 
   // Sem prato hoje (fim de semana ou feriado) → some
-  const semPrato = isFeriado || !CARDAPIO[today];
+  const semPrato = isFeriado || !CARDAPIO[today] || !CARDAPIO[today].items;
   if (semPrato) {
     container.innerHTML = "";
     return;
