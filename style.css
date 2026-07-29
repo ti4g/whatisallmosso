@@ -588,3 +588,263 @@ header p {
   transition: all 0.2s;
 }
 .wa-btn:active { transform: scale(0.97); }
+
+/* ═══════════════════════════════════════════════════════
+   RAIL (coluna direita) — base
+   No MOBILE o wrapper vira display:contents e some do layout,
+   deixando o fluxo idêntico ao original. week-rail e rail-ticket
+   ficam escondidos no mobile.
+   ═══════════════════════════════════════════════════════ */
+.rail, .main-left { display: contents; }
+.week-rail, .rail-ticket { display: none; }
+
+/* ═══════════════════════════════════════════════════════
+   DESKTOP / NOTEBOOK — Dashboard (≥ 1024px)
+   Tudo aqui só vale do desktop pra cima. Mobile intocado.
+   ═══════════════════════════════════════════════════════ */
+@media (min-width: 1024px) {
+  body { display: flex; align-items: flex-start; justify-content: center; }
+
+  .app {
+    max-width: 1240px;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 32px 34px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.55fr) minmax(360px, 1fr);
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+      "hd    hd"
+      "today rail"
+      "ft    ft";
+    column-gap: 28px;
+    row-gap: 16px;
+    align-items: stretch;
+  }
+
+  /* Elementos exclusivos do mobile */
+  .tabs,
+  #sec-semana,
+  #frase-do-dia,
+  .ticket-section { display: none !important; }
+
+  /* ── Header vira barra slim ── */
+  header {
+    grid-area: hd;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    padding: 15px 32px;
+    border-radius: 0 0 28px 28px;
+    margin-bottom: 0;
+    align-self: stretch;
+  }
+  header .header-emoji {
+    display: inline-block;
+    font-size: 2.1rem;
+    margin: 0;
+    animation: none;
+  }
+  header h1 { font-size: 1.9rem; }
+  header p {
+    margin: 0;
+    padding-left: 16px;
+    border-left: 2px solid rgba(255,255,255,0.3);
+    font-size: 0.9rem;
+  }
+  header .date-badge {
+    margin: 0 0 0 auto;
+    font-size: 1.05rem;
+    padding: 8px 20px;
+  }
+
+  /* ── Coluna esquerda: dia em foco (estica) + ticket embaixo ── */
+  .main-left {
+    grid-area: today;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+  }
+  #sec-hoje { padding: 0; display: flex; flex: 1; min-height: 0; }
+  #sec-hoje > .day-card { flex: 1; display: flex; flex-direction: column; width: 100%; }
+  #sec-hoje .menu-items { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  #sec-hoje > .weekend-msg { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+  #sec-hoje .day-card { border-radius: 26px; }
+  #sec-hoje .day-card-header { padding: 18px 30px; }
+  #sec-hoje .day-card-header .day-emoji { font-size: 2.4rem; }
+  #sec-hoje .day-card-header h2 { font-size: 1.75rem; }
+  #sec-hoje .day-card-header span { font-size: 0.82rem; }
+  #sec-hoje .card-date-badge { font-size: 1.1rem; padding: 7px 16px; }
+  #sec-hoje .menu-items { padding: 6px 20px 14px; }
+  #sec-hoje .menu-item { padding: 11px 12px; gap: 16px; }
+  #sec-hoje .item-icon { width: 48px; height: 48px; font-size: 1.5rem; border-radius: 15px; }
+  #sec-hoje .item-label { font-size: 0.72rem; }
+  #sec-hoje .item-name { font-size: 1.15rem; }
+  #sec-hoje .weekend-msg { padding: 56px 24px; }
+
+  /* ── Coluna direita: rail (semana estica + termômetro embaixo) ── */
+  .rail {
+    grid-area: rail;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    min-height: 0;
+  }
+
+  /* Lista da semana */
+  .week-rail {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    background: white;
+    border-radius: 22px;
+    padding: 13px;
+    box-shadow: var(--shadow);
+    min-height: 0;
+  }
+  .wr-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 7px;
+    min-height: 0;
+  }
+  .week-rail-head {
+    font-family: 'Fredoka One', cursive;
+    font-size: 0.98rem;
+    color: var(--green-dark);
+    padding: 2px 4px 4px;
+  }
+  .week-rail-day {
+    appearance: none;
+    text-align: left;
+    background: #fafefb;
+    border: 2px solid #eaf6ee;
+    border-radius: 14px;
+    padding: 9px 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.18s, background 0.18s, transform 0.12s;
+  }
+  .week-rail-day:hover { border-color: var(--green-light); transform: translateY(-1px); }
+  .week-rail-day.active {
+    border-color: var(--green);
+    background: #f0faf4;
+    box-shadow: 0 4px 14px rgba(45,158,95,0.14);
+  }
+  .week-rail-day.is-today { border-color: var(--yellow); }
+  .week-rail-day.is-today.active { border-color: var(--green); }
+
+  .wr-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+  .wr-dayname {
+    font-weight: 900;
+    font-size: 0.84rem;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .wr-badge {
+    background: var(--yellow);
+    color: var(--text);
+    font-size: 0.6rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 2px 9px;
+    border-radius: 20px;
+  }
+  /* Itens em 2 colunas pra encurtar cada card da semana */
+  .wr-items {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 14px;
+  }
+  .wr-items li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #556;
+    line-height: 1.25;
+    min-width: 0;
+  }
+  .wr-items li span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wr-ic { font-size: 0.9rem; flex-shrink: 0; }
+  .wr-msg {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #aaa;
+    padding: 1px 0;
+  }
+
+  /* Termômetro no rail (compacto) */
+  #votacao-container { padding: 0; }
+  #votacao-container .votacao-card { margin-top: 0; }
+  #votacao-container .votacao-header { padding: 8px 16px; }
+  #votacao-container .votacao-icon { font-size: 1.4rem; }
+  #votacao-container .therm-pills { padding: 6px 12px 4px; gap: 8px; }
+  #votacao-container .therm-pill { padding: 6px 5px; }
+  #votacao-container .therm-emoji { font-size: 1.2rem; }
+  #votacao-container .therm-label { font-size: 0.72rem; }
+  #votacao-container .therm-count { font-size: 0.82rem; }
+  #votacao-container .therm-seg-wrap { padding: 2px 14px 10px; }
+  #votacao-container .therm-seg-bar { height: 13px; }
+
+  /* Ticket no rail */
+  .rail-ticket {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--orange), #ff5722);
+    color: white;
+    border-radius: 20px;
+    padding: 18px 24px;
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    box-shadow: 0 6px 24px rgba(255,112,67,0.4);
+    transition: transform 0.18s, box-shadow 0.18s;
+    padding: 13px 22px;
+    font-size: 1.1rem;
+  }
+  .rail-ticket:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,112,67,0.45); }
+  .rail-ticket .ticket-icon { font-size: 1.3rem; }
+
+  /* Nota escondida no desktop (limpeza pro showcase); rodapé slim */
+  .info-note { display: none; }
+  .credits {
+    grid-area: ft;
+    margin: 0;
+    padding: 10px 16px 0;
+    border-top: none;
+  }
+  .credits .wa-btn { margin-top: 8px; padding: 9px 18px; font-size: 0.88rem; }
+
+  /* Blobs um pouco maiores pra preencher a tela larga */
+  .blob-1 { width: 460px; height: 460px; }
+  .blob-2 { width: 380px; height: 380px; }
+  .blob-3 { width: 320px; height: 320px; }
+}
+
+/* ── Ajuste fino para telas bem largas (Full HD+) ── */
+@media (min-width: 1500px) {
+  .app { max-width: 1340px; }
+}

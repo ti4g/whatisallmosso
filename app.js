@@ -166,7 +166,7 @@ if (waLink) waLink.href = WA_LINK;
 // ─────────────────────────────────────────
 // RENDERIZA CARD DE UM DIA
 // ─────────────────────────────────────────
-function renderCard(dayIndex, checkFeriado = false) {
+function renderCard(dayIndex, checkFeriado = false, eyebrow = "Cardápio de hoje") {
   if (checkFeriado && isFeriado) {
     return `<div class="weekend-msg">
       <span class="emoji">🎉</span>
@@ -222,7 +222,7 @@ function renderCard(dayIndex, checkFeriado = false) {
         <div class="day-card-header-left">
           <div class="day-emoji">${d.emoji}</div>
           <div>
-            <span>Cardápio de hoje</span>
+            <span>${eyebrow}</span>
             <h2>${DIAS[dayIndex]}-feira</h2>
           </div>
         </div>
@@ -232,7 +232,81 @@ function renderCard(dayIndex, checkFeriado = false) {
     </div>`;
 }
 
-document.getElementById("sec-hoje").innerHTML = renderCard(today, true);
+// ─────────────────────────────────────────
+// DIA EM FOCO (coluna esquerda no desktop; sempre "hoje" no mobile)
+// ─────────────────────────────────────────
+let focusedDay = today;
+
+function renderFocus() {
+  const isToday = focusedDay === today;
+  const eyebrow = isToday
+    ? "Cardápio de hoje"
+    : `Cardápio de ${DIAS[focusedDay].toLowerCase()}`;
+  document.getElementById("sec-hoje").innerHTML = renderCard(
+    focusedDay,
+    isToday,
+    eyebrow,
+  );
+  document.querySelectorAll(".week-rail-day").forEach((el) => {
+    el.classList.toggle("active", Number(el.dataset.day) === focusedDay);
+  });
+}
+
+// Clique num dia da lista (desktop) troca o card grande
+function focusDay(di) {
+  focusedDay = di;
+  renderFocus();
+}
+
+// ─────────────────────────────────────────
+// LISTA DA SEMANA — RAIL (só desktop)
+// ─────────────────────────────────────────
+function renderWeekRail() {
+  const rail = document.getElementById("week-rail");
+  if (!rail) return;
+
+  const cards = [1, 2, 3, 4, 5]
+    .map((di) => {
+      const d = CARDAPIO[di];
+      const isToday = di === today;
+      const dateLabel = d?.data || "";
+
+      let body;
+      if (d && d.naoLetivo) {
+        body = `<span class="wr-msg">📅 Não letivo</span>`;
+      } else if (!d || !d.items) {
+        body = `<span class="wr-msg">Sem cardápio</span>`;
+      } else {
+        body = `<ul class="wr-items">${d.items
+          .filter((i) => i.label !== "Acompanhamento")
+          .map(
+            (i) =>
+              `<li><span class="wr-ic">${i.icon}</span><span>${i.name}</span></li>`,
+          )
+          .join("")}</ul>`;
+      }
+
+      return `
+      <button class="week-rail-day${isToday ? " is-today" : ""}"
+              data-day="${di}" onclick="focusDay(${di})">
+        <div class="wr-top">
+          <span class="wr-dayname">${DIAS_SHORT[di]}${dateLabel ? ` · ${dateLabel}` : ""}</span>
+          ${isToday ? '<span class="wr-badge">hoje</span>' : ""}
+        </div>
+        ${body}
+      </button>`;
+    })
+    .join("");
+
+  rail.innerHTML = `<div class="week-rail-head">📅 A semana</div><div class="wr-list">${cards}</div>`;
+
+  document.querySelectorAll(".week-rail-day").forEach((el) => {
+    el.classList.toggle("active", Number(el.dataset.day) === focusedDay);
+  });
+}
+
+renderFocus();
+renderWeekRail();
 
 // ─────────────────────────────────────────
 // ABA SEMANA

@@ -47,15 +47,29 @@
 
     <div class="frase-do-dia hidden" id="frase-do-dia"></div>
 
-    <div class="section" id="sec-hoje"></div>
+    <!-- COLUNA ESQUERDA (desktop) — card de hoje + ticket. No mobile vira display:contents -->
+    <div class="main-left">
+      <div class="section" id="sec-hoje"></div>
+
+      <!-- TICKET (só desktop) — ancorado abaixo do cardápio de hoje -->
+      <a class="rail-ticket" href="https://si.ifto.edu.br/restaurante/gerar_ticket/" target="_blank">
+        <span class="ticket-icon">🎫</span> Gerar meu Ticket
+      </a>
+    </div>
 
     <div class="section hidden" id="sec-semana">
       <div class="week-nav" id="week-nav"></div>
       <div class="week-card" id="week-card-content"></div>
     </div>
 
-    <!-- VOTAÇÃO -->
-    <div class="section" id="votacao-container"></div>
+    <!-- COLUNA DIREITA (desktop) — no mobile vira display:contents e some do layout -->
+    <aside class="rail">
+      <!-- LISTA DA SEMANA (só desktop) -->
+      <div class="week-rail" id="week-rail"></div>
+
+      <!-- VOTAÇÃO / TERMÔMETRO -->
+      <div class="section" id="votacao-container"></div>
+    </aside>
 
     <!-- NOTA INFO -->
     <div class="info-note">
