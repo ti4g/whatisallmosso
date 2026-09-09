@@ -10,54 +10,36 @@
 // ─────────────────────────────────────────
 const CARDAPIO = {
   0: null,
-  1: {
-    data: '31/08', emoji: '🥩',
+  1: null,
+  2: null,
+  3: {
+    data: '09/09', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Strogonoff de frango' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata palha' },
       { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
     ]
   },
-  2: {
-    data: '01/09', emoji: '🍖',
-    items: [
-      { label: 'Prato Proteico', icon: '🍖', name: 'Grelhado misto (frango e calabresa)' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
-      { label: 'Salada',         icon: '🥗', name: 'Repolho, pepino e tomate' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'PTS acebolada' },
-    ]
-  },
-  3: {
-    data: '02/09', emoji: '🫘',
-    items: [
-      { label: 'Prato Proteico', icon: '🫘', name: 'Feijoada' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa mista' },
-      { label: 'Salada',         icon: '🥗', name: 'Acelga, repolho roxo e couve' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
-    ]
-  },
   4: {
-    data: '03/09', emoji: '🍗',
+    data: '10/09', emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Frango recheado' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
-      { label: 'Salada',         icon: '🥗', name: 'Couve, alface e vinagrete' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Lasanha de carne' },
+      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba' },
+      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Quibe de forno' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
     ]
   },
   5: {
-    data: '04/09', emoji: '🥩',
+    data: '11/09', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Tiras de carne ao molho barbecue' },
-      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
-      { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
+      { label: 'Guarnição',      icon: '🥕', name: 'Cenoura palito' },
+      { label: 'Salada',         icon: '🥗', name: 'Repolho e tomate' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de forno' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'PTS acebolada' },
     ]
   },
   6: null,
