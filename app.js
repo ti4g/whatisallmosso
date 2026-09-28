@@ -11,53 +11,53 @@
 const CARDAPIO = {
   0: null,
   1: {
-    data: '21/09', emoji: '🍗',
+    data: '28/09', emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
-      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão à bolonhesa' },
-      { label: 'Salada',         icon: '🥗', name: 'Repolho roxo, repolho branco e tomate' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Strogonoff de carne' },
+      { label: 'Guarnição',      icon: '🍟', name: 'Batata palha' },
+      { label: 'Salada',         icon: '🥗', name: 'Acelga, alface e pepino' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'PTS à jardineira' },
+      { label: 'Vegetariano',    icon: '🫘', name: 'Strogonoff de grão de bico' },
     ]
   },
   2: {
-    data: '22/09', emoji: '🥩',
+    data: '29/09', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Lagarto ao molho escuro' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
-      { label: 'Salada',         icon: '🥗', name: 'Acelga, couve e cenoura' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Frango assado' },
+      { label: 'Guarnição',      icon: '🍝', name: 'Macarrão alho e óleo' },
+      { label: 'Salada',         icon: '🥗', name: 'Repolho branco, repolho roxo e cenoura' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Disco de PTS' },
+      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de legumes' },
     ]
   },
   3: {
-    data: '23/09', emoji: '🍝',
+    data: '30/09', emoji: '🍲',
     items: [
-      { label: 'Prato Proteico', icon: '🍝', name: 'Lasanha de frango' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
+      { label: 'Prato Proteico', icon: '🍲', name: 'Feijoada' },
+      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
       { label: 'Salada',         icon: '🥗', name: 'Couve e vinagrete' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Feijoada vegetariana' },
     ]
   },
   4: {
-    data: '24/09', emoji: '🍖',
+    data: '01/10', emoji: '🫓',
     items: [
-      { label: 'Prato Proteico', icon: '🍖', name: 'Almôndegas ao sugo' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
+      { label: 'Prato Proteico', icon: '🫓', name: 'Panqueca de carne' },
+      { label: 'Guarnição',      icon: '🥦', name: 'Legumes refogados' },
       { label: 'Salada',         icon: '🥗', name: 'Salada mista' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Almôndegas de PTS' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Panqueca de PTS' },
     ]
   },
   5: {
-    data: '25/09', emoji: '🍗',
+    data: '02/10', emoji: '🍗',
     items: [
-      { label: 'Prato Proteico', icon: '🍗', name: 'Bife de frango' },
-      { label: 'Guarnição',      icon: '🥣', name: 'Maionese de legumes' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
+      { label: 'Prato Proteico', icon: '🍗', name: 'Tiras de frango com calabresa' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface, cenoura e acelga' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🍳', name: 'Omelete de forno' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'PTS acebolada' },
     ]
   },
   6: null,
