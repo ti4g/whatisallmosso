@@ -43,8 +43,8 @@ const CARDAPIO = {
   4: {
     data: '22/10', emoji: '🥩',
     items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Carne de panela' },
-      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
+      { label: 'Prato Proteico', icon: '🥩', name: 'Maria Isabel' },
+      { label: 'Guarnição',      icon: '🥔', name: 'Batata rústica' },
       { label: 'Salada',         icon: '🥗', name: 'Alface e beterraba' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🌱', name: 'Discos de PTS' },
@@ -54,7 +54,7 @@ const CARDAPIO = {
     data: '23/10', emoji: '🍗',
     items: [
       { label: 'Prato Proteico', icon: '🍗', name: 'Coxa e sobrecoxa assada' },
-      { label: 'Guarnição',      icon: '🥔', name: 'Purê de batata' },
+      { label: 'Guarnição',      icon: '🟤', name: 'Farofa' },
       { label: 'Salada',         icon: '🥗', name: 'Couve e tomate' },
       { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
       { label: 'Vegetariano',    icon: '🍳', name: 'Omelete' },
