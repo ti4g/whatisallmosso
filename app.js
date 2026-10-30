@@ -30,7 +30,16 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🌱', name: 'Galinhada vegetariana' },
     ]
   },
-  3: null,
+  3: {
+    data: '30/10', emoji: '🥩',
+    items: [
+      { label: 'Prato Proteico', icon: '🥩', name: 'Lasanha de carne' },
+      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
+      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
+      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
+      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
+    ]
+  },
   4: {
     data: '29/10', emoji: '🍗',
     items: [
@@ -41,16 +50,7 @@ const CARDAPIO = {
       { label: 'Vegetariano',    icon: '🌱', name: 'PTS xadrez' },
     ]
   },
-  5: {
-    data: '30/10', emoji: '🥩',
-    items: [
-      { label: 'Prato Proteico', icon: '🥩', name: 'Lasanha de carne' },
-      { label: 'Guarnição',      icon: '🟣', name: 'Beterraba cozida' },
-      { label: 'Salada',         icon: '🥗', name: 'Alface e cenoura' },
-      { label: 'Acompanhamento', icon: '🍚', name: 'Arroz e feijão' },
-      { label: 'Vegetariano',    icon: '🌱', name: 'Lasanha de PTS' },
-    ]
-  },
+  5: null,
   6: null,
 };
 // ─────────────────────────────────────────
